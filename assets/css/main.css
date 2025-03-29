@@ -180,6 +180,12 @@ h6 {
   font-weight: 700;
   color: var(--heading-color);
 }
+.header .logo h2 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 700;
+  color: var(--heading-color);
+}
 
 .header .social-links {
   margin: 0 0 20px 0;
@@ -476,6 +482,11 @@ h6 {
   font-weight: 700;
 }
 
+.page-title h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
 .page-title .breadcrumbs ol {
   display: flex;
   flex-wrap: wrap;
@@ -732,7 +743,7 @@ section,
 .resume .resume-item {
   padding: 0 0 20px 20px;
   margin-top: -2px;
-  border-left: 2px solid var(--accent-color);
+  /* border-left: 2px solid var(--accent-color); */
   position: relative;
 }
 
@@ -774,7 +785,7 @@ section,
   left: -9px;
   top: 0;
   background: var(--background-color);
-  border: 2px solid var(--accent-color);
+  /* border: 2px solid var(--accent-color); */
 }
 
 /*--------------------------------------------------------------
