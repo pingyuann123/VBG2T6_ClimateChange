@@ -1223,7 +1223,6 @@ section,
 --------------------------------------------------------------*/
 .service-details .services-list {
   padding: 10px 50pxpx;
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
   margin-bottom: 20px;
 }
 
