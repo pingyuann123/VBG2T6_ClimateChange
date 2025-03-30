@@ -30,11 +30,13 @@
   <link href="assets/css/main.css" rel="stylesheet">
   <script src="assets/js/intro.js" defer></script> <!-- Link to the external JavaScript file -->
   <style>
-    .introcontent{
+    .introcontent {
       display: none;
     }
-    button{
-      background-color: #ffffff; /* Green */
+
+    button {
+      background-color: #ffffff;
+      /* Green */
       border: none;
       border-bottom: 2px solid #149ddd;
       color: #050d18;
@@ -46,6 +48,7 @@
       margin: 4px 2px;
       cursor: pointer;
     }
+
     button:hover {
       color: #5f5f5f;
     }
@@ -165,17 +168,17 @@
               <div class="introcontent" id="problem">
                 <h3>Problem</h3>
                 <p>
-                  While urban countries have reaped many benefits from urbanization, 
-                  from improved infrastructure, technological advancements, and economic prosperity, 
-                  they also contribute disproportionately to climate change due to higher energy consumption, 
+                  While urban countries have reaped many benefits from urbanization,
+                  from improved infrastructure, technological advancements, and economic prosperity,
+                  they also contribute disproportionately to climate change due to higher energy consumption,
                   industrial activity, and emissions from transportation.
                 </p>
                 <p>
                   Urbanization impact on climate change had intensified, p
-                  articularly in terms of worsening air quality, increasing Urban Heat Island (UHI) effects, 
-                  and rising temperatures. As such, addressing their climate impact through strategic policies, 
-                  sustainable urban planning, and green infrastructure becomes increasingly urgent. 
-                  
+                  articularly in terms of worsening air quality, increasing Urban Heat Island (UHI) effects,
+                  and rising temperatures. As such, addressing their climate impact through strategic policies,
+                  sustainable urban planning, and green infrastructure becomes increasingly urgent.
+
                 </p>
               </div>
               <div class="introcontent" id="motivation">
@@ -194,16 +197,16 @@
                   ever.
                 </p>
                 <p>
-                  Given that, 
-                  we hope to identify key contributing factors, 
-                  examine the relationship between urbanisation, air quality, 
-                  and local climate shifts. 
-                  By identifying trends in temperature changes, pollution levels, 
-                  and mitigation strategies, 
-                  we seek to provide valuable insights for sustainable urban development. 
-                  Understanding these patterns will enable policymakers, urban planners, 
-                  and communities to implement strategies that balance growth with environmental responsibility, 
-                  ensuring a healthier and more sustainable future 
+                  Given that,
+                  we hope to identify key contributing factors,
+                  examine the relationship between urbanisation, air quality,
+                  and local climate shifts.
+                  By identifying trends in temperature changes, pollution levels,
+                  and mitigation strategies,
+                  we seek to provide valuable insights for sustainable urban development.
+                  Understanding these patterns will enable policymakers, urban planners,
+                  and communities to implement strategies that balance growth with environmental responsibility,
+                  ensuring a healthier and more sustainable future
 
                 </p>
               </div>
@@ -212,50 +215,61 @@
                 <ul>
                   <li>
                     Global Urbanization Trends (United Nations, n.d.)
+                    <ul>
+                      <li>
+                        This dataset provides insights into urban and rural population distributions, enabling analysis
+                        of rapid
+                        urbanization’s links to economic, environmental, and social factors.
+                      </li>
+                    </ul>
                   </li>
-                  <ul>
-                    <li>
-                      This dataset provides insights into urban and rural population distributions, enabling analysis of
-                      rapid urbanization’s links to economic, environmental, and social factors.
-                      Urbanization Rate vs GDP (Our World in Data, n.d.)
-                    </li>
-                  </ul>
+
+                  <li>
+                    Urbanization Rate vs GDP (Our World in Data, n.d.)
+                    <ul>
+                      <li>
+                        This dataset examines the relationship between economic growth and urbanization levels, helping
+                        to understand
+                        how industrialization drives city expansion.
+                      </li>
+                    </ul>
+                  </li>
 
                   <li>
                     Ambient Air Quality Database (WHO, 2024)
+                    <ul>
+                      <li>
+                        This dataset offers a global overview of air quality, tracking annual mean PM2.5 and PM10
+                        concentrations to
+                        analyze trends and urbanization’s impact on pollution.
+                      </li>
+                    </ul>
                   </li>
-                  <ul>
-                    <li>
-                      This dataset offers a global overview of air quality, tracking annual mean PM2.5 and PM10
-                      concentrations to analyze trends and urbanization’s impact on pollution.
-                      Global Surface Temperature Data (Global Data Lab, n.d.)
-                    </li>
-                  </ul>
 
                   <li>
                     Global Surface Temperature Data (Global Data Lab, n.d.)
+                    <ul>
+                      <li>
+                        This dataset records annual mean surface temperatures across geographic levels, allowing
+                        comparisons to
+                        determine whether urbanized areas experience greater warming.
+                      </li>
+                    </ul>
                   </li>
-                  <ul>
-                    <li>
-                      This dataset records annual mean surface temperatures across geographic levels, allowing
-                      comparisons to determine whether urbanized areas experience greater warming.
-                      CO₂ and Greenhouse Gas Emissions (GHG) Dataset (Our World in Data, 2024)
-                    </li>
-                  </ul>
 
                   <li>
                     CO₂ and Greenhouse Gas Emissions (GHG) Dataset (Our World in Data, 2024)
+                    <ul>
+                      <li>
+                        This dataset provides global, national, and sector-specific CO₂ and GHG emissions, enabling
+                        cross-country
+                        comparisons and analysis of urbanization’s impact on climate change and policy effectiveness.
+                      </li>
+                    </ul>
                   </li>
-                  <ul>
-                    <li>
-                      This dataset provides global, national, and sector-specific CO₂ and GHG emissions, enabling
-                      cross-country comparisons, and analysis of urbanization’s impact on climate change and policy
-                      effectiveness.
-                    </li>
-                  </ul>
-
                 </ul>
               </div>
+
 
 
             </div>
@@ -639,13 +653,11 @@
         prob.style.display = 'block';
         moti.style.display = 'none';
         data.style.display = 'none';
-      } 
-      else if (contentId == 'motivation') {
+      } else if (contentId == 'motivation') {
         moti.style.display = 'block';
         prob.style.display = 'none';
         data.style.display = 'none';
-      } 
-      else if (contentId == 'datasets') {
+      } else if (contentId == 'datasets') {
         data.style.display = 'block';
         prob.style.display = 'none';
         moti.style.display = 'none';
