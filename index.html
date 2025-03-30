@@ -610,17 +610,24 @@
   <script>
     function showContent(contentId) {
       // Hide all content sections first
+      var prob = document.getElementById('problem');
+      var moti = document.getElementById('motivation');
+      var data = document.getElementById('datasets');
+
       if (contentId == 'problem') {
-        var prob = document.getElementById('problem');
         prob.style.display = 'block';
+        moti.style.display = 'none';
+        data.style.display = 'none';
       } 
       else if (contentId == 'motivation') {
-        var moti = document.getElementById('motivation');
         moti.style.display = 'block';
+        prob.style.display = 'none';
+        data.style.display = 'none';
       } 
       else if (contentId == 'datasets') {
-        var data = document.getElementById('datasets');
         data.style.display = 'block';
+        prob.style.display = 'none';
+        moti.style.display = 'none';
       }
 
     }
