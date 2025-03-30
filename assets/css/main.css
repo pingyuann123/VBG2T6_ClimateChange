@@ -910,7 +910,7 @@ section,
 .services-list {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Optional: Adds space between buttons */
+  gap: 30px; /* Optional: Adds space between buttons */
 }
 
 .services .service-item .icon {
