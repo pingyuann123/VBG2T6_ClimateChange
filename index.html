@@ -29,7 +29,11 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
   <script src="assets/js/intro.js" defer></script> <!-- Link to the external JavaScript file -->
-
+  <style>
+    .introcontent{
+      display: none;
+    }
+  </style>
 </head>
 
 <body class="index-page">
@@ -152,7 +156,7 @@
                   and green infrastructure becomes increasingly urgent.
                 </p>
               </div>
-              <div class="introcontent" id="motivation" style="display: none;">
+              <div class="introcontent" id="motivation">
                 <h3>Motivation</h3>
                 <p>
                   According to NASA, global surface temperatures have risen by 1.2°C since the late 19th century,
@@ -182,7 +186,7 @@
                   ever.
                 </p>
               </div>
-              <div class="introcontent" id="datasets" style="display: none;">
+              <div class="introcontent" id="datasets">
                 <h3>Datasets</h3>
                 <ul>
                   <li>
@@ -604,20 +608,21 @@
   </main>
 
   <script>
-    function showContent(contentId) {
+    function showproblem(contentId) {
       // Hide all content sections first
-      var sections = document.getElementById('introcontent');
-      sections.forEach(function (section) {
-        section.style.display = 'none';
-      });
-
-      // Show the specific content section
-      var content = document.getElementById(contentId);
-      if (content) {
-        content.style.display = 'block'; // Make sure content is visible
-      } else {
-        console.error("Content with ID " + contentId + " not found.");
+      if (contentId == 'problem') {
+        var prob = document.getElementById('problem');
+        prob.style.display = 'block';
+      } 
+      else if (contentId == 'motivation') {
+        var moti = document.getElementById('motivation');
+        moti.style.display = 'block';
+      } 
+      else if (contentId == 'datasets') {
+        var data = document.getElementById('datasets');
+        data.style.display = 'block';
       }
+
     }
   </script>
 
