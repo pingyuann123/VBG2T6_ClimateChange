@@ -907,6 +907,11 @@ section,
 .services .service-item {
   position: relative;
 }
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Optional: Adds space between buttons */
+}
 
 .services .service-item .icon {
   background: var(--accent-color);
