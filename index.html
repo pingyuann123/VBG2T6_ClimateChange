@@ -73,7 +73,7 @@
     loadHTML("urbanization", "urbanization.html");
     loadHTML("impact", "impact.html");
 
-</script>
+  </script>
 
   <header id="header" class="header dark-background d-flex flex-column">
     <i class="header-toggle d-xl-none bi bi-list"></i>
@@ -553,59 +553,160 @@
 
 
     <!-- impacts Section -->
-    <section id="impact" class="resume section">
+    <section id="impact1" class="resume section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Climate Change Impacts</h2>
-        <p>"Short intro desc of ur part"</p>
+        <p><strong>Urbanization</strong> has undeniably driven industrialization, leading to significant environmental shifts. 
+          As cities expand, we see a direct impact on three critical variables — <strong>rising temperatures, declining air quality, and increasing CO₂ emissions </strong> — all of which contribute to climate change.</p><br>
+        <p>This impact analysis examines both the <strong>positive and negative consequences of urbanization</strong>, exploring how unchecked industrial 
+          expansion can worsen climate-related disasters and public health challenges. Through data-driven insights, we aim to highlight the urgent need for sustainable urban planning and mitigation efforts.</p>
       </div>
       <!-- End Section Title -->
-
       <div class="container">
-
-        <!--1st row-->
-        <div class="row">
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <!-- for a 1 row 2 chart way-->
-            <h3 class="resume-title">1st chart</h3>
-
-            <div class="resume-item">
-
+        <div class="tab-container">
+          <!-- Tab Buttons -->
+          <div class="tab-buttons">
+              <button class="tab-button active" onclick="openTab('benefits')">Benefits</button>
+              <button class="tab-button" onclick="openTab('drawbacks')">Drawbacks</button>
+          </div>
+      
+          <!-- Tab Contents -->
+          <div id="benefits" class="tab-content active">
+            <p>Urbanization has been a key driver of industrialization, leading to rapid economic growth and higher GDP per capita. As cities expand, industries flourish, creating more job opportunities, increasing wages, and improving living standards. This economic progress translates into better access to healthcare, sanitation, and technological advancements, contributing to a longer life expectancy. Over time, urban development has enhanced education, transportation, and overall infrastructure, making cities more efficient and productive.</p>
+            <div class="row">
+              <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <!-- for a 1 row 2 chart way-->
+                <h3 class="resume-title">Industrialization Intensity Index against Life Expectancy</h3>
+    
+                <div class="resume-item">
+                  <div class='tableauPlaceholder' id='viz1743516766067' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;IndustrializationIntensityIndexvsLifeExpectancy&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Testing_17435167467140&#47;IndustrializationIntensityIndexvsLifeExpectancy' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;IndustrializationIntensityIndexvsLifeExpectancy&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1743516766067');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                   var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>            </div>
+              </div>
+    
+              <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                <!-- for a 1 row 2 chart way-->
+                <h3 class="resume-title">Industrialization Intensity Index against GDP</h3>
+                <div class="resume-item">
+                  <div class='tableauPlaceholder' id='viz1743516591269' style='position: relative'><noscript><a href='#'><img alt='Industrialization Intensity Index vs GDP  ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;VA&#47;VAProject_17435160689010&#47;GDPvsIII&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='VAProject_17435160689010&#47;GDPvsIII' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;VA&#47;VAProject_17435160689010&#47;GDPvsIII&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1743516591269');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>            
+                </div>
+                <!-- End dashbaord Item -->
+              </div>
+            </div>
+          </div>
+      
+          <div id="drawbacks" class="tab-content">
+            <p>However, the flip side of urbanization is that the industrialization it brings also drives climate change. The very factors that lead to greater prosperity—such as increased energy consumption, manufacturing, and transportation—also contribute to rising CO2 emissions, air pollution, and deforestation. These environmental impacts accelerate global warming, worsening the urban heat island effect and leading to more extreme weather events.</p>
+    
+            <p>As a result, human health is increasingly at risk. Poor air quality and rising temperatures contribute to respiratory diseases, cardiovascular conditions, and heat-related illnesses. Additionally, natural disasters fueled by climate change—such as wildfires, floods, and droughts—cause significant economic damage, straining national resources and increasing the financial burden on individuals through rising insurance costs, property loss, and healthcare expenses.</p>
+            
+            <div class="mini-tab-buttons">
+              <button class="mini-tab-button active" onclick="openMiniTab('env')">Environmental Impact</button>
+              <button class="mini-tab-button" onclick="openMiniTab('health')">Health Risks</button>
+              <button class="mini-tab-button" onclick="openMiniTab('econ')">Economic Damages</button>
             </div>
 
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <!-- for a 1 row 2 chart way-->
-            <h3 class="resume-title">2nd dashboard/chart? if u want to do 2 col way</h3>
-            <div class="resume-item">
-
+            <div id="env" class="mini-tab-content active">
+              <div class="row">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                  <!-- for a 1 row 2 chart way-->
+                  <h3 class="resume-title">Industrialization Intensity Index against CO2 Emissions</h3>
+      
+                  <div class="resume-item">
+                    <div class='tableauPlaceholder' id='viz1743520012211' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;IndustrializationIntensityIndexvsCO2Emissions&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Testing_17435167467140&#47;IndustrializationIntensityIndexvsCO2Emissions' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;IndustrializationIntensityIndexvsCO2Emissions&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1743520012211');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                  </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                  <!-- for a 1 row 2 chart way-->
+                  <h3 class="resume-title">Temperature against No. of wildfire Occurences</h3>
+      
+                  <div class="resume-item">
+                    <div class='tableauPlaceholder' id='viz1743525571615' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;TemperaturevsNo_ofWildfirescases&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Testing_17435167467140&#47;TemperaturevsNo_ofWildfirescases' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;TemperaturevsNo_ofWildfirescases&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1743525571615');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                  </div>
+                </div>
             </div>
-            <!-- End dashbaord Item -->
-
-          </div>
+            <div class="row">
+              <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="resume-title">Temperature Trends Over Time</h3>
+                <div class="resume-item">
+                  <div class='tableauPlaceholder' id='viz1743526246628' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;TemperatureOverTime&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Testing_17435167467140&#47;TemperatureOverTime' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;TemperatureOverTime&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1743526246628');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="resume-title">Wildfire Occurences Over Time</h3>
+                <div class="resume-item">
+                  <div class='tableauPlaceholder' id='viz1743526332244' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;WildfiresOverTime&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Testing_17435167467140&#47;WildfiresOverTime' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;WildfiresOverTime&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1743526332244');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                </div>
+              </div>
+            </div>
 
         </div>
-
-        <!--2nd row-->
-        <div class="row">
-
-          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
-            <!-- for a 1 row per chart way-->
-            <h3 class="resume-title">1st chart</h3>
-
-            <div class="resume-item">
-
+        <div id="health" class="mini-tab-content">
+          <div class="row">
+            <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+              <!-- for a 1 row 2 chart way-->
+              <h3 class="resume-title">Top 5 Causes of Deaths Globally </h3>
+  
+              <div class="resume-item">
+                <div class='tableauPlaceholder' id='viz1743524165593' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;CausesofDeaths&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Testing_17435167467140&#47;CausesofDeaths' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;CausesofDeaths&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1743524165593');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+              </div>
             </div>
-
           </div>
-
-
+          <div class="row">
+            <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+              <!-- for a 1 row 2 chart way-->
+              <h3 class="resume-title">Top 5 Causes of Deaths Over Time</h3>
+  
+              <div class="resume-item">
+                <div class='tableauPlaceholder' id='viz1743524955275' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;DeathCausesovertime&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Testing_17435167467140&#47;DeathCausesovertime' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;DeathCausesovertime&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1743524955275');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+              </div>
+            </div>
+          </div>
+      
         </div>
-
+        <div id="econ" class="mini-tab-content">
+          <div class="row">
+            <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+              <!-- for a 1 row 2 chart way-->
+              <h3 class="resume-title">Economic Damages from Natural Disasters</h3>
+              <div class="resume-item">
+                <div class='tableauPlaceholder' id='viz1743526551118' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;DamagesCausedbyDisasters&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Testing_17435167467140&#47;DamagesCausedbyDisasters' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Te&#47;Testing_17435167467140&#47;DamagesCausedbyDisasters&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1743526551118');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height='500px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    
+    <script>
+        function openTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+    
+            // Show the selected tab content
+            document.getElementById(tabName).classList.add('active');
+    
+            // Add active class to the clicked button
+            event.currentTarget.classList.add('active');
+        }
+        function openMiniTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.mini-tab-content').forEach(tab => tab.classList.remove('active'));
+    
+            // Remove active class from all buttons
+            document.querySelectorAll('.mini-tab-button').forEach(button => button.classList.remove('active'));
+    
+            // Show the selected tab content
+            document.getElementById(tabName).classList.add('active');
+    
+            // Add active class to the clicked button
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 
     </section>
     <!-- /impacts Section -->
