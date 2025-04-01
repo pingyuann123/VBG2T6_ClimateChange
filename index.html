@@ -59,6 +59,21 @@
 </head>
 
 <body class="index-page">
+  <script>
+    function loadHTML(elementId, file) {
+        fetch(file)
+            .then(response => response.text())
+            .then(data => document.getElementById(elementId).innerHTML = data)
+            .catch(error => console.error('Error loading file:', error));
+    }
+
+    loadHTML("co2", "co2.html");
+    loadHTML("temperature", "temperature.html");
+    loadHTML("airquality", "airquality.html");
+    loadHTML("urbanization", "urbanization.html");
+    loadHTML("impact", "impact.html");
+
+</script>
 
   <header id="header" class="header dark-background d-flex flex-column">
     <i class="header-toggle d-xl-none bi bi-list"></i>
@@ -416,7 +431,7 @@
 
 
     <!-- co2 Section -->
-    <section id="co2" class="resume section">
+    <section id="co2part" class="resume section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -425,7 +440,7 @@
       </div>
       <!-- End Section Title -->
 
-      <div class="container">
+      <div class="container" id="co2">
 
         <!--1st row-->
         <div class="row">
