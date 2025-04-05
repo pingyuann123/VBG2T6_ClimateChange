@@ -11,6 +11,6 @@ function loadSection(url, targetId) {
   }
   
   document.addEventListener('DOMContentLoaded', () => {
-    loadSection('./urbanization.html', 'urbanizationsection');
+    loadSection('../urbanization.html', 'urbanizationsection');
   });
   
