@@ -1318,7 +1318,7 @@ section,
 .tab-button.active {
   font-weight: bold;
   color: white;
-  background-color: #007bff;
+  background-color: #091628;
   border-radius: 5px;
 }
 
@@ -1353,7 +1353,7 @@ section,
 .mini-tab-button.active {
   font-weight: bold;
   color: white;
-  background-color: #007bff;
+  background-color: #091628;
   border-radius: 5px;
 }
 
