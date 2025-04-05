@@ -13,7 +13,17 @@
 </head>
 
 <body>
-        <div class="container" id="greenhousesection">
+    <div class="container" id="greenhousesection">
+        <div class="tab-container">
+            <!-- Tab Buttons -->
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="openTab('GGOverview')">Overview Trends</button>
+                <button class="tab-button" onclick="openTab('GGDistribution')">Greenhouse Gas Distribution</button>
+                <button class="tab-button" onclick="openTab('GGGasType')">Gas Type Proportion</button>
+            </div>
+        </div>
+        <div id="GGOverview" class="tab-content active">
+
             <div class="row">
 
                 <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
@@ -31,7 +41,9 @@
 
 
             </div>
-            <!--1st row-->
+        </div>
+        <!--1st row-->
+        <div id="GGDistribution" class="tab-content">
             <div class="row">
 
                 <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
@@ -48,10 +60,13 @@
 
 
             </div>
-
-            <!--2nd row-->
-
-
+        </div>
+        <!--2nd row-->
+        <div id="GGGasType" class="tab-content">
+            <div class="mini-tab-buttons">
+                <button class="mini-tab-button active" onclick="openMiniTab('GGBreakdown')">Breakdowwn</button>
+                <button class="mini-tab-button" onclick="openMiniTab('GGTop20')">Top20</button>
+              </div>
         </div>
 </body>
 
