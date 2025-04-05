@@ -11,8 +11,10 @@ function loadSection(url, targetId) {
   }
   
   document.addEventListener('DOMContentLoaded', () => {
-    loadSection('../urbanization.html', 'urbanizationsection');
+    loadSection('../greenhouse.html', 'greenhousesection');
     loadSection('../impact.html', 'impactsection');
     loadSection('../airquality.html', 'airqualitysection');
+    loadSection('../urbanization.html', 'urbanizationsection');
+    loadSection('../tempUhi.html', 'tempUHIsection');
   });
   
