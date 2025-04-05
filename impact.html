@@ -1,40 +1,217 @@
-<!--1st row-->
-<div class="row">
+<!DOCTYPE HTML>
+<html>
 
-    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-      <!-- for a 1 row 2 chart way-->
-      <h3 class="resume-title">1st chart</h3>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+</head>
 
-      <div class="resume-item">
+<body>
+  <div class="container" id="impactsection">
+    <div class="tab-container">
+      <!-- Tab Buttons -->
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab('benefits')">Benefits</button>
+        <button class="tab-button" onclick="openTab('drawbacks')">Drawbacks</button>
+      </div>
+    </div>
+    <!-- Tab Contents -->
+    <div id="benefits" class="tab-content active">
+      <p>Urbanization has been a key driver of industrialization, leading to rapid economic growth and higher GDP
+        per capita. As cities expand, industries flourish, creating more job opportunities, increasing wages, and
+        improving living standards. This economic progress translates into better access to healthcare,
+        sanitation, and technological advancements, contributing to a longer life expectancy. Over time, urban
+        development has enhanced education, transportation, and overall infrastructure, making cities more
+        efficient and productive.</p>
+      <div class="row">
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <!-- for a 1 row 2 chart way-->
+          <h3 class="resume-title">Industrialization Intensity Index against Life Expectancy</h3>
 
+          <div class="resume-item">
+            <div id='imp1' class='tableauPlaceholder'>
+              <tableau-viz id="urb2" src='https://public.tableau.com/views/GGType/GGType'
+                style="width: 100%; height: 100%;">
+              </tableau-viz>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+          <!-- for a 1 row 2 chart way-->
+          <h3 class="resume-title">Industrialization Intensity Index against GDP</h3>
+          <div class="resume-item">
+            <div id='imp2' class='tableauPlaceholder'>
+              <tableau-viz id="urb2" src='https://public.tableau.com/views/GGType/GGType'
+                style="width: 100%; height: 100%;">
+              </tableau-viz>
+            </div>
+          </div>
+          <!-- End dashbaord Item -->
+        </div>
+      </div>
+    </div>
+    <!--1st row-->
+
+
+    <!--2nd row-->
+
+    <div id="drawbacks" class="tab-content">
+      <p>However, the flip side of urbanization is that the industrialization it brings also drives climate
+        change. The very factors that lead to greater prosperity—such as increased energy consumption,
+        manufacturing, and transportation—also contribute to rising CO2 emissions, air pollution, and
+        deforestation. These environmental impacts accelerate global warming, worsening the urban heat island
+        effect and leading to more extreme weather events.</p>
+
+      <p>As a result, human health is increasingly at risk. Poor air quality and rising temperatures contribute to
+        respiratory diseases, cardiovascular conditions, and heat-related illnesses. Additionally, natural
+        disasters fueled by climate change—such as wildfires, floods, and droughts—cause significant economic
+        damage, straining national resources and increasing the financial burden on individuals through rising
+        insurance costs, property loss, and healthcare expenses.</p>
+
+      <div class="mini-tab-buttons">
+        <button class="mini-tab-button active" onclick="openMiniTab('env')">Environmental Impact</button>
+        <button class="mini-tab-button" onclick="openMiniTab('health')">Health Risks</button>
+        <button class="mini-tab-button" onclick="openMiniTab('econ')">Economic Damages</button>
       </div>
 
-    </div>
+      <div id="env" class="mini-tab-content active">
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <!-- for a 1 row 2 chart way-->
+            <h3 class="resume-title">Industrialization Intensity Index against CO2 Emissions</h3>
 
-    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-      <!-- for a 1 row 2 chart way-->
-      <h3 class="resume-title">2nd dashboard/chart? if u want to do 2 col way</h3>
-      <div class="resume-item">
+            <div class="resume-item">
+              <div id='imp2' class='tableauPlaceholder'>
+                <tableau-viz id="urb2" src='https://public.tableau.com/views/GGType/GGType'
+                  style="width: 100%; height: 100%;">
+                </tableau-viz>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <!-- for a 1 row 2 chart way-->
+            <h3 class="resume-title">Temperature against No. of wildfire Occurences</h3>
+
+            <div class="resume-item">
+              <div id='imp2' class='tableauPlaceholder'>
+                <tableau-viz id="urb2" src='https://public.tableau.com/views/GGType/GGType'
+                  style="width: 100%; height: 100%;">
+                </tableau-viz>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="resume-title">Temperature Trends Over Time</h3>
+            <div class="resume-item">
+              <div id='imp2' class='tableauPlaceholder'>
+                <tableau-viz id="urb2" src='https://public.tableau.com/views/GGType/GGType'
+                  style="width: 100%; height: 100%;">
+                </tableau-viz>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="resume-title">Wildfire Occurences Over Time</h3>
+            <div class="resume-item">
+              <div id='imp2' class='tableauPlaceholder'>
+                <tableau-viz id="urb2" src='https://public.tableau.com/views/GGType/GGType'
+                  style="width: 100%; height: 100%;">
+                </tableau-viz>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
-      <!-- End dashbaord Item -->
+      <div id="health" class="mini-tab-content">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+            <!-- for a 1 row 2 chart way-->
+            <h3 class="resume-title">Top 5 Causes of Deaths Globally </h3>
 
+            <div class="resume-item">
+              <div id='imp2' class='tableauPlaceholder'>
+                <tableau-viz id="urb2" src='https://public.tableau.com/views/GGType/GGType'
+                  style="width: 100%; height: 100%;">
+                </tableau-viz>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+            <!-- for a 1 row 2 chart way-->
+            <h3 class="resume-title">Top 5 Causes of Deaths Over Time</h3>
+
+            <div class="resume-item">
+              <div id='imp2' class='tableauPlaceholder'>
+                <tableau-viz id="urb2" src='https://public.tableau.com/views/GGType/GGType'
+                  style="width: 100%; height: 100%;">
+                </tableau-viz>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div id="econ" class="mini-tab-content">
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+            <!-- for a 1 row 2 chart way-->
+            <h3 class="resume-title">Economic Damages from Natural Disasters</h3>
+            <div class="resume-item">
+              <div id='imp2' class='tableauPlaceholder'>
+                <tableau-viz id="urb2" src='https://public.tableau.com/views/GGType/GGType'
+                  style="width: 100%; height: 100%;">
+                </tableau-viz>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <script>
+      function openTab(tabName) {
+        // Hide all tab contents
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+
+        // Remove active class from all buttons
+        document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+
+        // Show the selected tab content
+        document.getElementById(tabName).classList.add('active');
+
+        // Add active class to the clicked button
+        event.currentTarget.classList.add('active');
+      }
+
+      function openMiniTab(tabName) {
+        // Hide all tab contents
+        document.querySelectorAll('.mini-tab-content').forEach(tab => tab.classList.remove('active'));
+
+        // Remove active class from all buttons
+        document.querySelectorAll('.mini-tab-button').forEach(button => button.classList.remove('active'));
+
+        // Show the selected tab content
+        document.getElementById(tabName).classList.add('active');
+
+        // Add active class to the clicked button
+        event.currentTarget.classList.add('active');
+      }
+    </script>
 
   </div>
+</body>
 
-  <!--2nd row-->
-  <div class="row">
-
-    <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
-      <!-- for a 1 row per chart way-->
-      <h3 class="resume-title">1st chart</h3>
-
-      <div class="resume-item">
-
-      </div>
-
-    </div>
-
-
-  </div>
+</html>
