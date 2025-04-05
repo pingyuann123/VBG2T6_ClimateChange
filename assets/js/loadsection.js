@@ -13,5 +13,6 @@ function loadSection(url, targetId) {
   document.addEventListener('DOMContentLoaded', () => {
     loadSection('../urbanization.html', 'urbanizationsection');
     loadSection('../impact.html', 'impactsection');
+    loadSection('../airquality.html', 'airqualitysection');
   });
   
