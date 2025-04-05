@@ -502,7 +502,7 @@
       </div>
       <!-- End Section Title -->
       <div class="container" id="impactsection"></div>
-    
+
 
     </section>
     <!-- /impacts Section -->
@@ -591,7 +591,36 @@
       }
 
     }
+
+    function openTab(tabName) {
+      // Hide all tab contents
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+
+      // Remove active class from all buttons
+      document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+
+      // Show the selected tab content
+      document.getElementById(tabName).classList.add('active');
+
+      // Add active class to the clicked button
+      event.currentTarget.classList.add('active');
+    }
+
+    function openMiniTab(tabName) {
+      // Hide all tab contents
+      document.querySelectorAll('.mini-tab-content').forEach(tab => tab.classList.remove('active'));
+
+      // Remove active class from all buttons
+      document.querySelectorAll('.mini-tab-button').forEach(button => button.classList.remove('active'));
+
+      // Show the selected tab content
+      document.getElementById(tabName).classList.add('active');
+
+      // Add active class to the clicked button
+      event.currentTarget.classList.add('active');
+    }
   </script>
+
 
   <footer id="footer" class="footer position-relative light-background">
 
