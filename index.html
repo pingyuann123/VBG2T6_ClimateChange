@@ -588,7 +588,7 @@
             };
           }
           return null;
-        }).filter(d => d !== null);
+        }).filter(d => d !== null); // Remove null values
 
         // Setup SVG canvas
         const svg = d3.select("#GGScatter"),
@@ -624,11 +624,13 @@
           .data(mergedData)
           .enter().append("circle")
           .attr("cx", d => {
-            if (isNaN(d.UrbanRate) || d.UrbanRate === null) return null; // Skip invalid data
+            const validUrbanRate = !isNaN(d.UrbanRate) && d.UrbanRate !== null;
+            if (!validUrbanRate) return null; // Skip invalid data
             return x(d.UrbanRate);
           })
           .attr("cy", d => {
-            if (isNaN(d.Emissions) || d.Emissions === null) return null; // Skip invalid data
+            const validEmissions = !isNaN(d.Emissions) && d.Emissions !== null;
+            if (!validEmissions) return null; // Skip invalid data
             return y(d.Emissions);
           })
           .attr("r", 4)
