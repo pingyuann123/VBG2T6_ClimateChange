@@ -575,7 +575,7 @@
 
         // Parse the urbanization data
         cleanUrbanizationData.forEach(d => {
-          d.UrbanRate = +d["Urban Population Share"]; // Adjust the column name if needed
+          d.UrbanRate = +d["Population share in urban areas"]; // Adjust the column name if needed
         });
 
         // Merge the two datasets by 'Entity' and log the process
