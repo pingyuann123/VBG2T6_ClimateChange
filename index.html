@@ -548,121 +548,126 @@
       event.currentTarget.classList.add('active');
     }
 
-    // File paths for the two CSV files
-    const ghgFile = "Datasets/greenhousegase/per-capita-ghg-emissions.csv";
-    const urbanizationFile = "Datasets/Urbanization/urbanisation_cleaned_data.csv";
-    console.log("urbanizationFile", urbanizationFile);
-    // Load both datasets
-    Promise.all([d3.csv(ghgFile), d3.csv(urbanizationFile)]).then(([ghgData, urbanizationData]) => {
-      // Log data for inspection
-      console.log("GHG Data:", ghgData.slice(0, 5)); // Log first 5 entries of GHG data
-      console.log("Urbanization Data:", urbanizationData.slice(0, 5)); // Log first 5 entries of Urbanization data
+    function createGHGUrbanizationChart() {
+      // File paths for the two CSV files
+      const ghgFile = "Datasets/greenhousegase/per-capita-ghg-emissions.csv";
+      const urbanizationFile = "Datasets/Urbanization/urbanisation_cleaned_data.csv";
 
-      // Check the columns and unique 'Entity' values
-      const ghgEntities = new Set(ghgData.map(d => d.Entity));
-      const urbanizationEntities = new Set(urbanizationData.map(d => d.Entity));
-      console.log("GHG Entities:", [...ghgEntities]);
-      console.log("Urbanization Entities:", [...urbanizationEntities]);
+      // Load both datasets
+      Promise.all([d3.csv(ghgFile), d3.csv(urbanizationFile)]).then(([ghgData, urbanizationData]) => {
+        // Log data for inspection
+        console.log("GHG Data:", ghgData.slice(0, 5)); // Log first 5 entries of GHG data
+        console.log("Urbanization Data:", urbanizationData.slice(0, 5)); // Log first 5 entries of Urbanization data
 
-      // Parse the data
-      ghgData.forEach(d => {
-        d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
-      });
+        // Check the columns and unique 'Entity' values
+        const ghgEntities = new Set(ghgData.map(d => d.Entity));
+        const urbanizationEntities = new Set(urbanizationData.map(d => d.Entity));
+        console.log("GHG Entities:", [...ghgEntities]);
+        console.log("Urbanization Entities:", [...urbanizationEntities]);
 
-      urbanizationData.forEach(d => {
-        d.UrbanRate = +d["Population share in urban areas"];
-      });
+        // Parse the data
+        ghgData.forEach(d => {
+          d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
+        });
 
-      // Merge the two datasets by 'Entity' and log the process
-      const mergedData = ghgData.map(d => {
-        const urbanData = urbanizationData.find(u => u.Entity === d.Entity);
-        if (urbanData) {
-          console.log(`Found match: ${d.Entity}`); // Log matches
-          return {
-            ...d,
-            UrbanRate: urbanData.UrbanRate
-          };
-        } else {
-          console.log(`No match found for: ${d.Entity}`); // Log no matches
-          return null;
+        urbanizationData.forEach(d => {
+          d.UrbanRate = +d["Population share in urban areas"];
+        });
+
+        // Merge the two datasets by 'Entity' and log the process
+        const mergedData = ghgData.map(d => {
+          const urbanData = urbanizationData.find(u => u.Entity === d.Entity);
+          if (urbanData) {
+            console.log(`Found match: ${d.Entity}`); // Log matches
+            return {
+              ...d,
+              UrbanRate: urbanData.UrbanRate
+            };
+          } else {
+            console.log(`No match found for: ${d.Entity}`); // Log no matches
+            return null;
+          }
+        }).filter(d => d !== null && !isNaN(d.Emissions) && !isNaN(d.UrbanRate));
+
+        console.log("Merged Data:", mergedData.slice(0, 5)); // Log the merged data
+
+        if (mergedData.length === 0) {
+          console.error("No data to display after merge. Check the entity matching.");
+          return;
         }
-      }).filter(d => d !== null && !isNaN(d.Emissions) && !isNaN(d.UrbanRate));
 
-      console.log("Merged Data:", mergedData.slice(0, 5)); // Log the merged data
+        // Set up the SVG canvas
+        const svg = d3.select("#GGScatter"),
+          margin = {
+            top: 40,
+            right: 30,
+            bottom: 60,
+            left: 80
+          },
+          width = +svg.attr("width") - margin.left - margin.right,
+          height = +svg.attr("height") - margin.top - margin.bottom,
+          g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
-      if (mergedData.length === 0) {
-        console.error("No data to display after merge. Check the entity matching.");
-        return;
-      }
+        // Set up the scales for the axes
+        const x = d3.scaleLinear()
+          .domain([d3.min(mergedData, d => d.UrbanRate) - 5, d3.max(mergedData, d => d.UrbanRate) + 5])
+          .range([0, width]);
 
-      // Set up the SVG canvas
-      const svg = d3.select("#GGScatter"),
-        margin = {
-          top: 40,
-          right: 30,
-          bottom: 60,
-          left: 80
-        },
-        width = +svg.attr("width") - margin.left - margin.right,
-        height = +svg.attr("height") - margin.top - margin.bottom,
-        g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+        const y = d3.scaleLinear()
+          .domain([d3.min(mergedData, d => d.Emissions) - 1, d3.max(mergedData, d => d.Emissions) + 1])
+          .range([height, 0]);
 
-      // Set up the scales for the axes
-      const x = d3.scaleLinear()
-        .domain([d3.min(mergedData, d => d.UrbanRate) - 5, d3.max(mergedData, d => d.UrbanRate) + 5])
-        .range([0, width]);
+        // X Axis
+        g.append("g")
+          .attr("transform", `translate(0,${height})`)
+          .call(d3.axisBottom(x));
 
-      const y = d3.scaleLinear()
-        .domain([d3.min(mergedData, d => d.Emissions) - 1, d3.max(mergedData, d => d.Emissions) + 1])
-        .range([height, 0]);
+        // Y Axis
+        g.append("g")
+          .call(d3.axisLeft(y));
 
-      // X Axis
-      g.append("g")
-        .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x));
+        // Dots
+        g.selectAll("circle")
+          .data(mergedData)
+          .enter().append("circle")
+          .attr("cx", d => x(d.UrbanRate))
+          .attr("cy", d => y(d.Emissions))
+          .attr("r", 4)
+          .style("fill", "#69b3a2")
+          .style("opacity", 0.8)
+          .append("title")
+          .text(d => `${d.Entity}\nEmissions: ${d.Emissions} t CO₂e\nUrban Rate: ${d.UrbanRate}%`);
 
-      // Y Axis
-      g.append("g")
-        .call(d3.axisLeft(y));
+        // X Label
+        svg.append("text")
+          .attr("x", width / 2 + margin.left)
+          .attr("y", height + margin.top + 40)
+          .attr("text-anchor", "middle")
+          .style("font-size", "14px")
+          .text("Urbanization Rate (%)");
 
-      // Dots
-      g.selectAll("circle")
-        .data(mergedData)
-        .enter().append("circle")
-        .attr("cx", d => x(d.UrbanRate))
-        .attr("cy", d => y(d.Emissions))
-        .attr("r", 4)
-        .style("fill", "#69b3a2")
-        .style("opacity", 0.8)
-        .append("title")
-        .text(d => `${d.Entity}\nEmissions: ${d.Emissions} t CO₂e\nUrban Rate: ${d.UrbanRate}%`);
+        // Y Label
+        svg.append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("x", -(height / 2) - margin.top)
+          .attr("y", margin.left / 3)
+          .attr("text-anchor", "middle")
+          .style("font-size", "14px")
+          .text("GHG Emissions per Capita (t CO₂e)");
 
-      // X Label
-      svg.append("text")
-        .attr("x", width / 2 + margin.left)
-        .attr("y", height + margin.top + 40)
-        .attr("text-anchor", "middle")
-        .style("font-size", "14px")
-        .text("Urbanization Rate (%)");
+        // Chart Title
+        svg.append("text")
+          .attr("x", (width / 2) + margin.left)
+          .attr("y", margin.top / 2)
+          .attr("text-anchor", "middle")
+          .style("font-size", "18px")
+          .style("font-weight", "bold")
+          .text("Scatter Plot of GHG Emissions vs Urbanization Rate");
+      });
+    }
 
-      // Y Label
-      svg.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("x", -(height / 2) - margin.top)
-        .attr("y", margin.left / 3)
-        .attr("text-anchor", "middle")
-        .style("font-size", "14px")
-        .text("GHG Emissions per Capita (t CO₂e)");
-
-      // Chart Title
-      svg.append("text")
-        .attr("x", (width / 2) + margin.left)
-        .attr("y", margin.top / 2)
-        .attr("text-anchor", "middle")
-        .style("font-size", "18px")
-        .style("font-weight", "bold")
-        .text("Scatter Plot of GHG Emissions vs Urbanization Rate");
-    });
+    // Call the function inside the script to create the chart
+    createGHGUrbanizationChart();
   </script>
 
 
