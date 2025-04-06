@@ -588,11 +588,11 @@
 
       // Scales
       const x = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.UrbanRate) + 5])
+        .domain([0, d3.max(data, d => d.Emissions) + 5])
         .range([0, width]);
 
       const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.Emissions) + 5])
+        .domain([0, d3.max(data, d => d.UrbanRate) + 5])
         .range([height, 0]);
       const c = d3.scaleOrdinal()
         .domain(data.map(d => d.Entity))
