@@ -570,12 +570,16 @@
         ghgData.forEach(d => {
           const rawValue = d["Per capita greenhouse gas emissions in CO2"];
           d.Emissions = rawValue && rawValue !== ".." ? +rawValue.trim() : NaN;
+          console.log("Cleaned Emissions:", d.Emissions, "Type:", typeof d.Emissions); // Log cleaned value and type
+
         });
 
         // Parse & clean Urbanization Data
         cleanUrbanizationData.forEach(d => {
           const rawValue = d["Urban population (% of total population)"];
           d.UrbanRate = rawValue && rawValue !== ".." ? +rawValue.replace('%', '').trim() : NaN;
+          console.log("Cleaned Urban Rate:", d.UrbanRate, "Type:", typeof d.UrbanRate); // Log cleaned value and type
+
         });
 
         // Merge datasets based on Entity
