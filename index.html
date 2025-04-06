@@ -560,7 +560,9 @@
           d.Year = +d.Year;
           d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
           d.UrbanRate = +d["urban population (% of total population)"].replace('%', '').trim();
-          console.log(d.Year, d.Emissions, d.UrbanRate); // Log the parsed values for debugging
+          console.log(d.Year, typeof d.Year) 
+          console.log(d.Emissions, typeof d.Emissions)
+          console.log(d.UrbanRate, typeof d.UrbanRate); // Log the parsed values for debugging
           // Check for invalid data and log errors
           if (isNaN(d.Emissions)) {
             console.error(`Invalid GHG Emissions for ${d.Entity} in year ${d.Year}`);
