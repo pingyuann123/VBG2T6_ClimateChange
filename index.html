@@ -554,46 +554,45 @@
 
       // Load both datasets
       Promise.all([d3.csv(ghgFile), d3.csv(urbanizationFile)]).then(([ghgData, urbanizationData]) => {
-        // Clean the urbanization data to remove invalid characters
+
+        // Clean Urbanization Data
         const cleanUrbanizationData = urbanizationData.map(d => {
           const cleanD = {};
           for (let key in d) {
             if (d.hasOwnProperty(key)) {
-              cleanD[key.replace(/[\u0000]/g, '')] = d[key]; // Remove null byte characters
+              cleanD[key.replace(/[\u0000]/g, '')] = d[key]; // remove null bytes
             }
           }
           return cleanD;
         });
 
-        // Log cleaned data for inspection
-        console.log("Cleaned Urbanization Data:", cleanUrbanizationData.slice(0, 5));
-        console.log("GHG Data:", ghgData.slice(0, 5));
-        // Parse the GHG data
+        // Parse & clean GHG Data
         ghgData.forEach(d => {
-          d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
+          const rawValue = d["Per capita greenhouse gas emissions in CO2"];
+          d.Emissions = rawValue && rawValue !== ".." ? +rawValue.trim() : NaN;
         });
 
-        // Parse the urbanization data
+        // Parse & clean Urbanization Data
         cleanUrbanizationData.forEach(d => {
-          d.UrbanRate = +d["Urban population (% of total population)"]; // Adjust the column name if needed
+          const rawValue = d["Urban population (% of total population)"];
+          d.UrbanRate = rawValue && rawValue !== ".." ? +rawValue.replace('%', '').trim() : NaN;
         });
 
-        // Merge the two datasets by 'Entity' and log the process
+        // Merge datasets based on Entity
         const mergedData = ghgData.map(d => {
           const urbanData = cleanUrbanizationData.find(u => u.Entity === d.Entity);
-          if (urbanData) {
+          if (urbanData && !isNaN(d.Emissions) && !isNaN(urbanData.UrbanRate)) {
             return {
               ...d,
               UrbanRate: urbanData.UrbanRate
             };
-          } else {
-            return null;
           }
-        }).filter(d => d !== null && !isNaN(d.Emissions) && !isNaN(d.UrbanRate));
+          return null;
+        }).filter(d => d !== null);
 
         console.log("Merged Data:", mergedData.slice(0, 5));
 
-        // Set up the SVG canvas
+        // Setup SVG canvas
         const svg = d3.select("#GGScatter"),
           margin = {
             top: 40,
@@ -605,7 +604,7 @@
           height = +svg.attr("height") - margin.top - margin.bottom,
           g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
-        // Set up the scales for the axes
+        // Setup scales
         const x = d3.scaleLinear()
           .domain([d3.min(mergedData, d => d.UrbanRate) - 5, d3.max(mergedData, d => d.UrbanRate) + 5])
           .range([0, width]);
@@ -614,16 +613,15 @@
           .domain([d3.min(mergedData, d => d.Emissions) - 1, d3.max(mergedData, d => d.Emissions) + 1])
           .range([height, 0]);
 
-        // X Axis
+        // Draw Axes
         g.append("g")
           .attr("transform", `translate(0,${height})`)
           .call(d3.axisBottom(x));
 
-        // Y Axis
         g.append("g")
           .call(d3.axisLeft(y));
 
-        // Dots
+        // Plot Points
         g.selectAll("circle")
           .data(mergedData)
           .enter().append("circle")
@@ -635,7 +633,7 @@
           .append("title")
           .text(d => `${d.Entity}\nEmissions: ${d.Emissions} t CO₂e\nUrban Rate: ${d.UrbanRate}%`);
 
-        // X Label
+        // X Axis Label
         svg.append("text")
           .attr("x", width / 2 + margin.left)
           .attr("y", height + margin.top + 40)
@@ -643,7 +641,7 @@
           .style("font-size", "14px")
           .text("Urbanization Rate (%)");
 
-        // Y Label
+        // Y Axis Label
         svg.append("text")
           .attr("transform", "rotate(-90)")
           .attr("x", -(height / 2) - margin.top)
@@ -663,7 +661,7 @@
       });
     }
 
-    // Call the function to generate the chart
+    // Call the function
     createGHGUrbanizationChart();
   </script>
 
