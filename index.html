@@ -570,12 +570,12 @@
         console.log("GHG Data:", ghgData.slice(0, 5));
         // Parse the GHG data
         ghgData.forEach(d => {
-          d.Emissions = +d["Urban population (% of total population)"];
+          d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
         });
 
         // Parse the urbanization data
         cleanUrbanizationData.forEach(d => {
-          d.UrbanRate = +d["Population share in urban areas"]; // Adjust the column name if needed
+          d.UrbanRate = +d["Urban population (% of total population)"]; // Adjust the column name if needed
         });
 
         // Merge the two datasets by 'Entity' and log the process
