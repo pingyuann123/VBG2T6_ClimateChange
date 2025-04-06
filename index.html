@@ -589,6 +589,15 @@
           }
           return null;
         }).filter(d => d !== null); // Remove null values
+        // Check for null or NaN values in mergedData
+        mergedData.forEach((d, index) => {
+          if (isNaN(d.Emissions) || d.Emissions === null) {
+            console.log(`Invalid data at index ${index}:`, d);
+          }
+          if (isNaN(d.UrbanRate) || d.UrbanRate === null) {
+            console.log(`Invalid UrbanRate at index ${index}:`, d);
+          }
+        });
 
         // Setup SVG canvas
         const svg = d3.select("#GGScatter"),
