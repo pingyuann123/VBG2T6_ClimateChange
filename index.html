@@ -548,116 +548,71 @@
       event.currentTarget.classList.add('active');
     }
 
-    function createGHGUrbanizationChart() {
-      const combinedFile = "Datasets/combines.csv"; // Update with the combined CSV file path
-
-      // Load the combined dataset
-      d3.csv(combinedFile).then((data) => {
-
-        // Parse & clean data
-        data.forEach(d => {
-          // Convert Year, Emissions, and UrbanRate to numeric values
-          d.Year = +d.Year;
-          d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
-          d.UrbanRate = +d["urban population (% of total population)"].replace('%', '').trim();
-          console.log(d.Year, typeof d.Year) 
-          console.log(d.Emissions, typeof d.Emissions)
-          console.log(d.UrbanRate, typeof d.UrbanRate); // Log the parsed values for debugging
-          // Check for invalid data and log errors
-          if (isNaN(d.Emissions)) {
-            console.error(`Invalid GHG Emissions for ${d.Entity} in year ${d.Year}`);
-          }
-          if (isNaN(d.UrbanRate)) {
-            console.error(`Invalid Urban Rate for ${d.Entity} in year ${d.Year}`);
-          }
-        });
-         // Log the cleaned data for debugging
-        // Setup SVG canvas
-        const svg = d3.select("#GGScatter"),
-          margin = {
-            top: 40,
-            right: 30,
-            bottom: 60,
-            left: 80
-          },
-          width = +svg.attr("width") - margin.left - margin.right,
-          height = +svg.attr("height") - margin.top - margin.bottom,
-          g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
-
-        // Setup scales
-        const x = d3.scaleLinear()
-          .domain([d3.min(data, d => d.UrbanRate) - 5, d3.max(data, d => d.UrbanRate) + 5])
-          .range([0, width]);
-
-        const y = d3.scaleLinear()
-          .domain([d3.min(data, d => d.Emissions) - 1, d3.max(data, d => d.Emissions) + 1])
-          .range([height, 0]);
-
-        // Draw Axes
-        g.append("g")
-          .attr("transform", `translate(0,${height})`)
-          .call(d3.axisBottom(x));
-
-        g.append("g")
-          .call(d3.axisLeft(y));
-
-        // Draw circles for each data point
-        g.selectAll("circle")
-          .data(data)
-          .enter().append("circle")
-          .attr("cx", d => {
-            if (isNaN(d.UrbanRate)) {
-              console.error(`Skipping circle: Invalid Urban Rate for ${d.Entity} in year ${d.Year}`);
-              return 0; // Skip invalid data
-            }
-            return x(d.UrbanRate);
-          })
-          .attr("cy", d => {
-            if (isNaN(d.Emissions)) {
-              console.error(`Skipping circle: Invalid Emissions for ${d.Entity} in year ${d.Year}`);
-              return 0; // Skip invalid data
-            }
-            return y(d.Emissions);
-          })
-          .attr("r", 4)
-          .style("fill", "#69b3a2")
-          .style("opacity", 0.8)
-          .append("title")
-          .text(d => `${d.Entity}\nEmissions: ${d.Emissions} t CO₂e\nUrban Rate: ${d.UrbanRate}%`);
-
-        // X Axis Label
-        svg.append("text")
-          .attr("x", width / 2 + margin.left)
-          .attr("y", height + margin.top + 40)
-          .attr("text-anchor", "middle")
-          .style("font-size", "14px")
-          .text("Urbanization Rate (%)");
-
-        // Y Axis Label
-        svg.append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("x", -(height / 2) - margin.top)
-          .attr("y", margin.left / 3)
-          .attr("text-anchor", "middle")
-          .style("font-size", "14px")
-          .text("GHG Emissions per Capita (t CO₂e)");
-
-        // Chart Title
-        svg.append("text")
-          .attr("x", (width / 2) + margin.left)
-          .attr("y", margin.top / 2)
-          .attr("text-anchor", "middle")
-          .style("font-size", "18px")
-          .style("font-weight", "bold")
-          .text("Scatter Plot of GHG Emissions vs Urbanization Rate");
-
-      }).catch(error => {
-        console.error("Error loading the CSV file:", error);
-      });
+    function makeChart(data) {
+      // y position using d3.scaleLinear for GHG Emissions (Per capita CO2 emissions)
+      const y = d3.scaleLinear()
+          .domain([0, d3.max(data, d => d.Emissions) + 1]) // Dynamic domain based on the max value of Emissions
+          .range([465, 10]);  // Y position from 465px (bottom) to 10px (top)
+      
+      // x position using d3.scaleLinear for Urbanization Rate
+      const x = d3.scaleLinear()
+          .domain([0, d3.max(data, d => d.UrbanRate) + 5]) // Dynamic domain based on the max value of UrbanRate
+          .range([60, 440]);  // X position from 60px (left) to 440px (right)
+      
+      // Fill color scale for countries based on a unique entity identifier (can be modified for different coloring)
+      const c = d3.scaleOrdinal()
+          .domain(data.map(d => d.Entity))  // Use entity name to color each country uniquely
+          .range(d3.schemeCategory10);  // Predefined color scheme (you can adjust this)
+      
+      // Radius scale based on emissions (fare was used in the original sample code, but here it's for GHG emissions)
+      const r = d3.scaleLinear()
+          .domain([0, d3.max(data, d => d.Emissions)]) // Domain is based on emissions
+          .range([5, 20]);  // Radius size between 5 and 20 pixels
+    
+      // Stroke color scale (can be based on some condition, like urbanization rate or other)
+      const s = d3.scaleOrdinal()
+          .domain(["low", "high"])  // Low and High Urbanization categories, can be adjusted
+          .range(["#e31a1c", "#1f78b4"]);  // Colors for different urbanization levels
+    
+      // Select the canvas (chart container)
+      const canvas = d3.select(".chart")
+          .style("width", "500px")
+          .style("height", "500px");
+      
+      // Select all circle elements, bind data, and enter selection
+      const scatter = d3.select(".chart").selectAll("circle")
+          .data(data);
+    
+      // Enter Selection: Create circles for each data point
+      const enter = scatter.enter().append("circle")
+          .attr("fill-opacity", 0.85)
+          .attr("stroke-width", "5px")
+          .attr("fill", function(d, i) { return c(d.Entity); })  // Color based on Entity (country)
+          .attr("stroke", function(d) { return s(d.UrbanRate > 50 ? "high" : "low"); })  // High/Low urbanization color
+          .attr("r", function(d) { return r(d.Emissions); });  // Radius based on Emissions
+    
+      // Add a title to each circle for mouseover tooltip
+      enter.append("svg:title")
+          .text(function(d) { return `${d.Entity}\nEmissions: ${d.Emissions} t CO₂e\nUrban Rate: ${d.UrbanRate}%`; });
+      
+      // Set the position (cx, cy) for each circle based on UrbanRate and Emissions
+      enter
+          .attr("cx", function(d) { return x(d.UrbanRate); })  // X based on UrbanRate
+          .attr("cy", function(d) { return y(d.Emissions); });  // Y based on Emissions
     }
-
-    // Call the function to create the chart
-    createGHGUrbanizationChart();
+    
+    // Load CSV and call the chart function
+    d3.csv("path/to/your/combined.csv").then(function(data) {
+      // Convert necessary columns to numerical values
+      data.forEach(d => {
+        d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
+        d.UrbanRate = +d["urban population (% of total population)"];
+      });
+    
+      // Call the function with the loaded data
+      makeChart(data);
+    });
+    
   </script>
 
 
