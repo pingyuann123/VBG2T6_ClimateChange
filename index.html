@@ -76,6 +76,23 @@
       margin-right: auto;
       border: 1px solid black;
     }
+
+    .GGScatter {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+    }
+
+    .axis-label {
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .chart-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 
@@ -549,70 +566,101 @@
     }
 
     function makeChart(data) {
-      // y position using d3.scaleLinear for GHG Emissions (Per capita CO2 emissions)
-      const y = d3.scaleLinear()
-          .domain([0, d3.max(data, d => d.Emissions) + 1]) // Dynamic domain based on the max value of Emissions
-          .range([465, 10]);  // Y position from 465px (bottom) to 10px (top)
-      
-      // x position using d3.scaleLinear for Urbanization Rate
+      const svg = d3.select(".GGScatter");
+      const width = +svg.attr("width");
+      const height = +svg.attr("height");
+      const margin = {
+        top: 20,
+        right: 30,
+        bottom: 50,
+        left: 60
+      };
+      const plotWidth = width - margin.left - margin.right;
+      const plotHeight = height - margin.top - margin.bottom;
+
       const x = d3.scaleLinear()
-          .domain([0, d3.max(data, d => d.UrbanRate) + 5]) // Dynamic domain based on the max value of UrbanRate
-          .range([60, 440]);  // X position from 60px (left) to 440px (right)
-      
-      // Fill color scale for countries based on a unique entity identifier (can be modified for different coloring)
-      const c = d3.scaleOrdinal()
-          .domain(data.map(d => d.Entity))  // Use entity name to color each country uniquely
-          .range(d3.schemeCategory10);  // Predefined color scheme (you can adjust this)
-      
-      // Radius scale based on emissions (fare was used in the original sample code, but here it's for GHG emissions)
+        .domain([0, d3.max(data, d => d.Emissions) + 5])
+        .range([0, plotWidth]);
+
+      const y = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.UrbanRate) + 10])
+        .range([plotHeight, 0]);
+
+      const color = d3.scaleOrdinal(d3.schemeCategory10);
+
       const r = d3.scaleLinear()
-          .domain([0, d3.max(data, d => d.Emissions)]) // Domain is based on emissions
-          .range([5, 20]);  // Radius size between 5 and 20 pixels
-    
-      // Stroke color scale (can be based on some condition, like urbanization rate or other)
-      const s = d3.scaleOrdinal()
-          .domain(["low", "high"])  // Low and High Urbanization categories, can be adjusted
-          .range(["#e31a1c", "#1f78b4"]);  // Colors for different urbanization levels
-    
-      // Select the canvas (chart container)
-      const canvas = d3.select(".GGScatter")
-          .style("width", "500px")
-          .style("height", "500px");
-      
-      // Select all circle elements, bind data, and enter selection
-      const scatter = d3.select(".GGScatter").selectAll("circle")
-          .data(data);
-    
-      // Enter Selection: Create circles for each data point
-      const enter = scatter.enter().append("circle")
-          .attr("fill-opacity", 0.85)
-          .attr("stroke-width", "5px")
-          .attr("fill", function(d, i) { return c(d.Entity); })  // Color based on Entity (country)
-          .attr("stroke", function(d) { return s(d.UrbanRate > 50 ? "high" : "low"); })  // High/Low urbanization color
-          .attr("r", function(d) { return r(d.Emissions); });  // Radius based on Emissions
-    
-      // Add a title to each circle for mouseover tooltip
-      enter.append("svg:title")
-          .text(function(d) { return `${d.Entity}\nEmissions: ${d.Emissions} t CO₂e\nUrban Rate: ${d.UrbanRate}%`; });
-      
-      // Set the position (cx, cy) for each circle based on UrbanRate and Emissions
-      enter
-          .attr("cx", function(d) { return x(d.UrbanRate); })  // X based on UrbanRate
-          .attr("cy", function(d) { return y(d.Emissions); });  // Y based on Emissions
+        .domain([0, d3.max(data, d => d.Emissions)])
+        .range([4, 12]);
+
+      const g = svg.append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+      // X Axis
+      g.append("g")
+        .attr("transform", `translate(0,${plotHeight})`)
+        .call(d3.axisBottom(x))
+        .append("text")
+        .attr("class", "axis-label")
+        .attr("x", plotWidth / 2)
+        .attr("y", 40)
+        .attr("fill", "black")
+        .text("Avg. Per capita greenhouse gas emissions in CO₂ equivalents");
+
+      // Y Axis
+      g.append("g")
+        .call(d3.axisLeft(y))
+        .append("text")
+        .attr("class", "axis-label")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -plotHeight / 2)
+        .attr("y", -45)
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .text("Avg. Proportion Urbanized");
+
+      // Circles
+      g.selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", d => x(d.Emissions))
+        .attr("cy", d => y(d.UrbanRate))
+        .attr("r", d => r(d.Emissions))
+        .attr("fill", d => color(d.Entity))
+        .attr("fill-opacity", 0.7)
+        .attr("stroke", "#fff")
+        .attr("stroke-width", 1)
+        .append("title")
+        .text(d => `${d.Entity}\nEmissions: ${d.Emissions} t CO₂e\nUrban Rate: ${d.UrbanRate}%`);
+
+      // Trend Line (Linear Regression)
+      const xMean = d3.mean(data, d => d.Emissions);
+      const yMean = d3.mean(data, d => d.UrbanRate);
+      const slope = d3.sum(data, d => (d.Emissions - xMean) * (d.UrbanRate - yMean)) /
+        d3.sum(data, d => Math.pow(d.Emissions - xMean, 2));
+      const intercept = yMean - slope * xMean;
+
+      const xVals = d3.extent(data, d => d.Emissions);
+      const line = d3.line()
+        .x(d => x(d))
+        .y(d => y(intercept + slope * d));
+
+      g.append("path")
+        .datum(xVals)
+        .attr("fill", "none")
+        .attr("stroke", "#555")
+        .attr("stroke-width", 2)
+        .attr("d", line);
     }
-    
-    // Load CSV and call the chart function
-    d3.csv("Datasets/combines.csv").then(function(data) {
-      // Convert necessary columns to numerical values
+
+    d3.csv("Datasets/combines.csv").then(function (data) {
       data.forEach(d => {
         d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
         d.UrbanRate = +d["urban population (% of total population)"];
       });
-    
-      // Call the function with the loaded data
+
       makeChart(data);
     });
-    
   </script>
 
 
