@@ -597,6 +597,9 @@
       const c = d3.scaleOrdinal()
         .domain(data.map(d => d.Entity))
         .range(d3.schemeCategory10);
+      const r = d3.scaleSqrt()
+        .domain([0, d3.max(data, d => d.Emissions)])
+        .range([5, 30]); // Adjust min and max radius values as needed
       // Axes
       plotArea.append("g")
         .attr("transform", `translate(0, ${height})`)
@@ -675,7 +678,7 @@
         .attr("d", trendLine)
         .text(
           `y = ${slope.toFixed(2)}x + ${intercept.toFixed(2)}\nR² = ${rSquared.toFixed(3)}\nP = ${typeof pValue === "number" ? pValue.toExponential(2) : pValue}`
-          );
+        );
     }
 
 
