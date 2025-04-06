@@ -602,7 +602,7 @@
     }
     
     // Load CSV and call the chart function
-    d3.csv("Datasets/combined.csv").then(function(data) {
+    d3.csv("Datasets/combines.csv").then(function(data) {
       // Convert necessary columns to numerical values
       data.forEach(d => {
         d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
