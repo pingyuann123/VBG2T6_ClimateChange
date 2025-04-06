@@ -594,7 +594,9 @@
       const y = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.Emissions) + 5])
         .range([height, 0]);
-
+      const c = d3.scaleOrdinal()
+        .domain(data.map(d => d.Entity))
+        .range(d3.schemeCategory10);
       // Axes
       plotArea.append("g")
         .attr("transform", `translate(0, ${height})`)
@@ -671,7 +673,9 @@
         .attr("stroke", "#555")
         .attr("stroke-width", 1)
         .attr("d", trendLine)
-        .text(`y = ${slope.toFixed(2)}x + ${intercept.toFixed(2)}\nR² = ${rSquared.toFixed(3)}\nP = ${typeof pValue === "number" ? pValue.toExponential(2) : pValue}`);
+        .text(
+          `y = ${slope.toFixed(2)}x + ${intercept.toFixed(2)}\nR² = ${rSquared.toFixed(3)}\nP = ${typeof pValue === "number" ? pValue.toExponential(2) : pValue}`
+          );
     }
 
 
