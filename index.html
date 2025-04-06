@@ -570,18 +570,12 @@
         ghgData.forEach(d => {
           const rawValue = d["Per capita greenhouse gas emissions in CO2"];
           d.Emissions = rawValue && rawValue !== ".." ? +rawValue.trim() : NaN;
-          console.log("Cleaned Emissions:", d.Emissions, "Type:", typeof d
-          .Emissions); // Log cleaned value and type
-
         });
 
         // Parse & clean Urbanization Data
         cleanUrbanizationData.forEach(d => {
           const rawValue = d["Urban population (% of total population)"];
           d.UrbanRate = rawValue && rawValue !== ".." ? +rawValue.replace('%', '').trim() : NaN;
-          console.log("Cleaned Urban Rate:", d.UrbanRate, "Type:", typeof d
-          .UrbanRate); // Log cleaned value and type
-
         });
 
         // Merge datasets based on Entity
@@ -595,8 +589,6 @@
           }
           return null;
         }).filter(d => d !== null);
-
-        console.log("Merged Data:", mergedData.slice(0, 5));
 
         // Setup SVG canvas
         const svg = d3.select("#GGScatter"),
@@ -627,21 +619,16 @@
         g.append("g")
           .call(d3.axisLeft(y));
 
+        // Draw circles for each data point
         g.selectAll("circle")
           .data(mergedData)
           .enter().append("circle")
           .attr("cx", d => {
-            if (isNaN(d.UrbanRate) || d.UrbanRate === null) {
-              console.log(`Skipping entity (Invalid Urban Rate): ${d.Entity}`);
-              return null; // Skip this point by returning null (it will not be drawn)
-            }
+            if (isNaN(d.UrbanRate) || d.UrbanRate === null) return null; // Skip invalid data
             return x(d.UrbanRate);
           })
           .attr("cy", d => {
-            if (isNaN(d.Emissions) || d.Emissions === null) {
-              console.log(`Skipping entity (Invalid Emissions): ${d.Entity}`);
-              return null; // Skip this point by returning null (it will not be drawn)
-            }
+            if (isNaN(d.Emissions) || d.Emissions === null) return null; // Skip invalid data
             return y(d.Emissions);
           })
           .attr("r", 4)
@@ -649,7 +636,6 @@
           .style("opacity", 0.8)
           .append("title")
           .text(d => `${d.Entity}\nEmissions: ${d.Emissions} t CO₂e\nUrban Rate: ${d.UrbanRate}%`);
-
 
         // X Axis Label
         svg.append("text")
@@ -679,7 +665,7 @@
       });
     }
 
-    // Call the function
+    // Call the function to create the chart
     createGHGUrbanizationChart();
   </script>
 
