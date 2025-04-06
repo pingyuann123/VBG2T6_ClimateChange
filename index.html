@@ -549,52 +549,49 @@
     }
 
     function createGHGUrbanizationChart() {
-      // File paths for the two CSV files
       const ghgFile = "Datasets/greenhousegase/per-capita-ghg-emissions.csv";
       const urbanizationFile = "Datasets/Urbanization/urbanisation_cleaned_data.csv";
 
       // Load both datasets
       Promise.all([d3.csv(ghgFile), d3.csv(urbanizationFile)]).then(([ghgData, urbanizationData]) => {
-        // Log data for inspection
-        console.log("GHG Data:", ghgData.slice(0, 5)); // Log first 5 entries of GHG data
-        console.log("Urbanization Data:", urbanizationData.slice(0, 5)); // Log first 5 entries of Urbanization data
+        // Clean the urbanization data to remove invalid characters
+        const cleanUrbanizationData = urbanizationData.map(d => {
+          const cleanD = {};
+          for (let key in d) {
+            if (d.hasOwnProperty(key)) {
+              cleanD[key.replace(/[\u0000]/g, '')] = d[key]; // Remove null byte characters
+            }
+          }
+          return cleanD;
+        });
 
-        // Check the columns and unique 'Entity' values
-        const ghgEntities = new Set(ghgData.map(d => d.Entity));
-        const urbanizationEntities = new Set(urbanizationData.map(d => d.Entity));
-        console.log("GHG Entities:", [...ghgEntities]);
-        console.log("Urbanization Entities:", [...urbanizationEntities]);
+        // Log cleaned data for inspection
+        console.log("Cleaned Urbanization Data:", cleanUrbanizationData.slice(0, 5));
 
-        // Parse the data
+        // Parse the GHG data
         ghgData.forEach(d => {
           d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
         });
 
-        urbanizationData.forEach(d => {
-          d.UrbanRate = +d["Population share in urban areas"];
+        // Parse the urbanization data
+        cleanUrbanizationData.forEach(d => {
+          d.UrbanRate = +d["Urban Population Share"]; // Adjust the column name if needed
         });
 
         // Merge the two datasets by 'Entity' and log the process
         const mergedData = ghgData.map(d => {
-          const urbanData = urbanizationData.find(u => u.Entity === d.Entity);
+          const urbanData = cleanUrbanizationData.find(u => u.Entity === d.Entity);
           if (urbanData) {
-            console.log(`Found match: ${d.Entity}`); // Log matches
             return {
               ...d,
               UrbanRate: urbanData.UrbanRate
             };
           } else {
-            console.log(`No match found for: ${d.Entity}`); // Log no matches
             return null;
           }
         }).filter(d => d !== null && !isNaN(d.Emissions) && !isNaN(d.UrbanRate));
 
-        console.log("Merged Data:", mergedData.slice(0, 5)); // Log the merged data
-
-        if (mergedData.length === 0) {
-          console.error("No data to display after merge. Check the entity matching.");
-          return;
-        }
+        console.log("Merged Data:", mergedData.slice(0, 5));
 
         // Set up the SVG canvas
         const svg = d3.select("#GGScatter"),
@@ -666,7 +663,7 @@
       });
     }
 
-    // Call the function inside the script to create the chart
+    // Call the function to generate the chart
     createGHGUrbanizationChart();
   </script>
 
