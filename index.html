@@ -550,7 +550,7 @@
 
     function createGHGUrbanizationChart() {
       const ghgFile = "Datasets/greenhousegase/per-capita-ghg-emissions.csv";
-      const urbanizationFile = "Datasets/Urbanization/urbanisation_cleaned_data.csv";
+      const urbanizationFile = "Datasets/Urbanization/share-of-population-urban_cleaned.csv";
 
       // Load both datasets
       Promise.all([d3.csv(ghgFile), d3.csv(urbanizationFile)]).then(([ghgData, urbanizationData]) => {
@@ -567,10 +567,10 @@
 
         // Log cleaned data for inspection
         console.log("Cleaned Urbanization Data:", cleanUrbanizationData.slice(0, 5));
-
+        console.log("GHG Data:", ghgData.slice(0, 5));
         // Parse the GHG data
         ghgData.forEach(d => {
-          d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
+          d.Emissions = +d["Urban population (% of total population)"];
         });
 
         // Parse the urbanization data
