@@ -578,9 +578,9 @@
           d.UrbanRate = rawValue && rawValue !== ".." ? +rawValue.replace('%', '').trim() : NaN;
         });
 
-        // Merge datasets based on Entity
+        // Merge datasets based on both Entity and Year
         const mergedData = ghgData.map(d => {
-          const urbanData = cleanUrbanizationData.find(u => u.Entity === d.Entity);
+          const urbanData = cleanUrbanizationData.find(u => u.Entity === d.Entity && u.Year === d.Year);
           if (urbanData && !isNaN(d.Emissions) && !isNaN(urbanData.UrbanRate)) {
             return {
               ...d,
@@ -589,15 +589,6 @@
           }
           return null;
         }).filter(d => d !== null); // Remove null values
-        // Check for null or NaN values in mergedData
-        mergedData.forEach((d, index) => {
-          if (isNaN(d.Emissions) || d.Emissions === null) {
-            console.log(`Invalid data at index ${index}:`, d);
-          }
-          if (isNaN(d.UrbanRate) || d.UrbanRate === null) {
-            console.log(`Invalid UrbanRate at index ${index}:`, d);
-          }
-        });
 
         // Setup SVG canvas
         const svg = d3.select("#GGScatter"),
