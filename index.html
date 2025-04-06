@@ -555,6 +555,9 @@
       // Load both datasets
       Promise.all([d3.csv(ghgFile), d3.csv(urbanizationFile)]).then(([ghgData, urbanizationData]) => {
     
+        console.log("GHG Data Loaded:", ghgData);
+        console.log("Urbanization Data Loaded:", urbanizationData);
+    
         // Clean Urbanization Data
         const cleanUrbanizationData = urbanizationData.map(d => {
           const cleanD = {};
@@ -569,13 +572,25 @@
         // Parse & clean GHG Data (converting strings to numbers)
         ghgData.forEach(d => {
           const rawValue = d["Per capita greenhouse gas emissions in CO2"];
+          console.log(`Raw GHG Value for ${d.Entity}:`, rawValue);
           d.Emissions = rawValue && rawValue !== ".." ? parseFloat(rawValue.trim()) : NaN;
+          console.log(`Parsed Emissions for ${d.Entity}:`, d.Emissions, "Type:", typeof d.Emissions);
+          // Check if parsed value is valid
+          if (isNaN(d.Emissions)) {
+            console.error(`Invalid Emissions Value for ${d.Entity}:`, rawValue);
+          }
         });
     
         // Parse & clean Urbanization Data (converting strings to numbers)
         cleanUrbanizationData.forEach(d => {
           const rawValue = d["Urban population (% of total population)"];
+          console.log(`Raw Urban Rate for ${d.Entity}:`, rawValue);
           d.UrbanRate = rawValue && rawValue !== ".." ? parseFloat(rawValue.replace('%', '').trim()) : NaN;
+          console.log(`Parsed Urban Rate for ${d.Entity}:`, d.UrbanRate, "Type:", typeof d.UrbanRate);
+          // Check if parsed value is valid
+          if (isNaN(d.UrbanRate)) {
+            console.error(`Invalid Urban Rate Value for ${d.Entity}:`, rawValue);
+          }
         });
     
         // Merge datasets based on both Entity and Year
@@ -589,6 +604,8 @@
           }
           return null;
         }).filter(d => d !== null); // Remove null values
+    
+        console.log("Merged Data:", mergedData);
     
         // Setup SVG canvas
         const svg = d3.select("#GGScatter"),
