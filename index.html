@@ -551,49 +551,44 @@
     function createGHGUrbanizationChart() {
       const ghgFile = "Datasets/greenhousegase/per-capita-ghg-emissions.csv";
       const urbanizationFile = "Datasets/Urbanization/share-of-population-urban_cleaned.csv";
-    
+
       // Load both datasets
       Promise.all([d3.csv(ghgFile), d3.csv(urbanizationFile)]).then(([ghgData, urbanizationData]) => {
-    
-        console.log("GHG Data Loaded:", ghgData);
-        console.log("Urbanization Data Loaded:", urbanizationData);
-    
+
         // Clean Urbanization Data
         const cleanUrbanizationData = urbanizationData.map(d => {
           const cleanD = {};
           for (let key in d) {
             if (d.hasOwnProperty(key)) {
-              cleanD[key.replace(/[\u0000]/g, '')] = d[key]; // remove null bytes
+              cleanD[key.replace(/[\u0000]/g, '')] = d[key]; // Remove null bytes
             }
           }
           return cleanD;
         });
-    
-        // Parse & clean GHG Data (converting strings to numbers)
+
+        // Parse & clean GHG Data
         ghgData.forEach(d => {
           const rawValue = d["Per capita greenhouse gas emissions in CO2"];
-          console.log(`Raw GHG Value for ${d.Entity}:`, rawValue);
-          d.Emissions = rawValue && rawValue !== ".." ? parseFloat(rawValue.trim()) : NaN;
-          console.log(`Parsed Emissions for ${d.Entity}:`, d.Emissions, "Type:", typeof d.Emissions);
-          // Check if parsed value is valid
+          d.Emissions = rawValue && rawValue !== ".." ? +rawValue.trim() : NaN;
+          // Convert Year to number
+          d.Year = +d.Year; // Convert Year to number
           if (isNaN(d.Emissions)) {
-            console.error(`Invalid Emissions Value for ${d.Entity}:`, rawValue);
+            console.error(`Invalid GHG Emissions for ${d.Entity} in year ${d.Year}: ${rawValue}`);
           }
         });
-    
-        // Parse & clean Urbanization Data (converting strings to numbers)
+
+        // Parse & clean Urbanization Data
         cleanUrbanizationData.forEach(d => {
           const rawValue = d["Urban population (% of total population)"];
-          console.log(`Raw Urban Rate for ${d.Entity}:`, rawValue);
-          d.UrbanRate = rawValue && rawValue !== ".." ? parseFloat(rawValue.replace('%', '').trim()) : NaN;
-          console.log(`Parsed Urban Rate for ${d.Entity}:`, d.UrbanRate, "Type:", typeof d.UrbanRate);
-          // Check if parsed value is valid
+          d.UrbanRate = rawValue && rawValue !== ".." ? +rawValue.replace('%', '').trim() : NaN;
+          // Convert Year to number
+          d.Year = +d.Year; // Convert Year to number
           if (isNaN(d.UrbanRate)) {
-            console.error(`Invalid Urban Rate Value for ${d.Entity}:`, rawValue);
+            console.error(`Invalid Urban Rate for ${d.Entity} in year ${d.Year}: ${rawValue}`);
           }
         });
-    
-        // Merge datasets based on both Entity and Year
+
+        // Merge datasets based on Entity and Year (also check if any data is missing)
         const mergedData = ghgData.map(d => {
           const urbanData = cleanUrbanizationData.find(u => u.Entity === d.Entity && u.Year === d.Year);
           if (urbanData && !isNaN(d.Emissions) && !isNaN(urbanData.UrbanRate)) {
@@ -604,9 +599,9 @@
           }
           return null;
         }).filter(d => d !== null); // Remove null values
-    
-        console.log("Merged Data:", mergedData);
-    
+
+        console.log("Merged Data: ", mergedData); // Log merged data for debugging
+
         // Setup SVG canvas
         const svg = d3.select("#GGScatter"),
           margin = {
@@ -618,34 +613,40 @@
           width = +svg.attr("width") - margin.left - margin.right,
           height = +svg.attr("height") - margin.top - margin.bottom,
           g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
-    
+
         // Setup scales
         const x = d3.scaleLinear()
           .domain([d3.min(mergedData, d => d.UrbanRate) - 5, d3.max(mergedData, d => d.UrbanRate) + 5])
           .range([0, width]);
-    
+
         const y = d3.scaleLinear()
           .domain([d3.min(mergedData, d => d.Emissions) - 1, d3.max(mergedData, d => d.Emissions) + 1])
           .range([height, 0]);
-    
+
         // Draw Axes
         g.append("g")
           .attr("transform", `translate(0,${height})`)
           .call(d3.axisBottom(x));
-    
+
         g.append("g")
           .call(d3.axisLeft(y));
-    
+
         // Draw circles for each data point
         g.selectAll("circle")
           .data(mergedData)
           .enter().append("circle")
           .attr("cx", d => {
-            if (isNaN(d.UrbanRate) || d.UrbanRate === null) return null; // Skip invalid data
+            if (isNaN(d.UrbanRate) || d.UrbanRate === null) {
+              console.error(`Skipping circle: Invalid Urban Rate for ${d.Entity} in year ${d.Year}`);
+              return null; // Skip invalid data
+            }
             return x(d.UrbanRate);
           })
           .attr("cy", d => {
-            if (isNaN(d.Emissions) || d.Emissions === null) return null; // Skip invalid data
+            if (isNaN(d.Emissions) || d.Emissions === null) {
+              console.error(`Skipping circle: Invalid Emissions for ${d.Entity} in year ${d.Year}`);
+              return null; // Skip invalid data
+            }
             return y(d.Emissions);
           })
           .attr("r", 4)
@@ -653,7 +654,7 @@
           .style("opacity", 0.8)
           .append("title")
           .text(d => `${d.Entity}\nEmissions: ${d.Emissions} t CO₂e\nUrban Rate: ${d.UrbanRate}%`);
-    
+
         // X Axis Label
         svg.append("text")
           .attr("x", width / 2 + margin.left)
@@ -661,7 +662,7 @@
           .attr("text-anchor", "middle")
           .style("font-size", "14px")
           .text("Urbanization Rate (%)");
-    
+
         // Y Axis Label
         svg.append("text")
           .attr("transform", "rotate(-90)")
@@ -670,7 +671,7 @@
           .attr("text-anchor", "middle")
           .style("font-size", "14px")
           .text("GHG Emissions per Capita (t CO₂e)");
-    
+
         // Chart Title
         svg.append("text")
           .attr("x", (width / 2) + margin.left)
@@ -681,10 +682,9 @@
           .text("Scatter Plot of GHG Emissions vs Urbanization Rate");
       });
     }
-    
+
     // Call the function to create the chart
     createGHGUrbanizationChart();
-    
   </script>
 
 
