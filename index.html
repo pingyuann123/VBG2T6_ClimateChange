@@ -360,7 +360,7 @@
         <div class="row">
           <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
             <h3 class="resume-title">Greenhouse Gas Emissions vs Urbanization Rate</h3>
-            <svg id="GGScatter" width="900" height="500"></svg>
+            <svg id="GGScatter" width="100%" height="900"></svg>
           </div>
         </div>
       </div>
@@ -547,16 +547,14 @@
 
     // Load both datasets
     Promise.all([d3.csv(ghgFile), d3.csv(urbanizationFile)]).then(([ghgData, urbanizationData]) => {
-      // Parse the GHG data
+      // Parse the GHG data and remove NaN values
       ghgData.forEach(d => {
         d.Emissions = +d["Per capita greenhouse gas emissions in CO2"]; // Convert to number
-        console.log(d.Emissions); // Log the emissions data
       });
 
-      // Parse the urbanization data
+      // Parse the urbanization data and remove NaN values
       urbanizationData.forEach(d => {
         d.UrbanRate = +d["Population share in urban areas"]; // Convert to number
-        console.log(d.UrbanRate); // Log the urban rate data
       });
 
       // Merge the two datasets by 'Entity' (assuming 'Entity' is the common key)
@@ -569,9 +567,9 @@
           };
         }
         return null;
-      }).filter(d => d !== null); // Remove rows with NaN values
+      }).filter(d => d !== null && !isNaN(d.Emissions) && !isNaN(d.UrbanRate)); // Remove null and NaN values
 
-      // Log merged data to check for issues
+      // Log merged data to check if any invalid entries were removed
       console.log(mergedData.slice(0, 5)); // Log first 5 merged data points
 
       // Set up the SVG canvas
