@@ -565,7 +565,7 @@
       event.currentTarget.classList.add('active');
     }
 
-    
+
     function makeChart(data) {
       const svgWidth = 500,
         svgHeight = 500;
@@ -677,12 +677,32 @@
     }
 
     // Load CSV and convert values
-    d3.csv("Datasets/combines.csv").then(function (data) {
-      data.forEach(d => {
+    d3.csv("Datasets/combines.csv").then(function (rawData) {
+      // Convert columns to numbers first
+      rawData.forEach(d => {
         d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
         d.UrbanRate = +d["urban population (% of total population)"];
       });
-      makeChart(data);
+
+      // Group by Entity and calculate average Emissions and UrbanRate
+      const grouped = d3.rollups(
+        rawData,
+        v => ({
+          Emissions: d3.mean(v, d => d.Emissions),
+          UrbanRate: d3.mean(v, d => d.UrbanRate)
+        }),
+        d => d.Entity
+      );
+
+      // Transform back into an array of objects
+      const averagedData = grouped.map(([Entity, values]) => ({
+        Entity: Entity,
+        Emissions: values.Emissions,
+        UrbanRate: values.UrbanRate
+      }));
+
+      // Now call the chart with the averaged data
+      makeChart(averagedData);
     });
   </script>
 
