@@ -1,0 +1,36 @@
+{
+  "chart": {
+    "title": "Per capita greenhouse gas emissions",
+    "subtitle": "[Greenhouse gas emissions](#dod:ghgemissions) include carbon dioxide, methane and nitrous oxide from all sources, including land-use change. They are measured in tonnes of [carbon dioxide-equivalents](#dod:carbondioxideequivalents) over a 100-year timescale.",
+    "note": "Land-use change emissions can be negative.",
+    "citation": "Jones et al. (2024); Population based on various sources (2024)",
+    "originalChartUrl": "https://ourworldindata.org/grapher/per-capita-ghg-emissions?v=1&csvType=full&useColumnShortNames=false",
+    "selection": [
+      "China",
+      "Brazil",
+      "India",
+      "World"
+    ]
+  },
+  "columns": {
+    "Per capita greenhouse gas emissions in CO₂ equivalents": {
+      "titleShort": "Per capita greenhouse gas emissions including land use",
+      "titleLong": "Per capita greenhouse gas emissions including land use",
+      "descriptionShort": "[Greenhouse gas emissions](#dod:ghgemissions) are measured in tonnes per person of [carbon dioxide-equivalents](#dod:carbondioxideequivalents) over a 100-year timescale.",
+      "descriptionProcessing": "Emissions given in tonnes have been converted to carbon-dioxide equivalents over a 100-year timescale using a conversion factor of 273 for nitrous oxide, 29.8 for methane from fossil sources, and 27.2 for methane from agricultural and land use sources. These factors are taken from the 6th Assessment Report (AR6) of the Intergovernmental Panel on Climate Change (IPCC).",
+      "shortUnit": "t/person",
+      "unit": "tonnes of CO₂ equivalents per person",
+      "timespan": "1850-2023",
+      "type": "Numeric",
+      "owidVariableId": 998950,
+      "shortName": "annual_emissions_ghg_total_co2eq_per_capita",
+      "lastUpdated": "2024-11-21",
+      "nextUpdate": "2025-11-21",
+      "citationShort": "Jones et al. (2024); Population based on various sources (2024) – with major processing by Our World in Data",
+      "citationLong": "Jones et al. (2024); Population based on various sources (2024) – with major processing by Our World in Data. “Per capita greenhouse gas emissions including land use” [dataset]. Jones et al., “National contributions to climate change 2024.2”; Various sources, “Population” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/998950.metadata.json"
+    }
+  },
+  "dateDownloaded": "2025-03-30",
+  "activeFilters": {}
+}
