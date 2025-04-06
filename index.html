@@ -599,7 +599,7 @@
         .range(d3.schemeCategory10);
       const r = d3.scaleSqrt()
         .domain([0, d3.max(data, d => d.Emissions)])
-        .range([5, 30]); // Adjust min and max radius values as needed
+        .range([-50, 30]); // Adjust min and max radius values as needed
       // Axes
       plotArea.append("g")
         .attr("transform", `translate(0, ${height})`)
