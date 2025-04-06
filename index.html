@@ -69,6 +69,13 @@
     ul {
       list-style-type: disc;
     }
+
+    svg {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px solid black;
+    }
   </style>
 </head>
 
@@ -547,30 +554,46 @@
 
     // Load both datasets
     Promise.all([d3.csv(ghgFile), d3.csv(urbanizationFile)]).then(([ghgData, urbanizationData]) => {
-      // Parse the GHG data and remove NaN values
+      // Log data for inspection
+      console.log("GHG Data:", ghgData.slice(0, 5)); // Log first 5 entries of GHG data
+      console.log("Urbanization Data:", urbanizationData.slice(0, 5)); // Log first 5 entries of Urbanization data
+
+      // Check the columns and unique 'Entity' values
+      const ghgEntities = new Set(ghgData.map(d => d.Entity));
+      const urbanizationEntities = new Set(urbanizationData.map(d => d.Entity));
+      console.log("GHG Entities:", [...ghgEntities]);
+      console.log("Urbanization Entities:", [...urbanizationEntities]);
+
+      // Parse the data
       ghgData.forEach(d => {
-        d.Emissions = +d["Per capita greenhouse gas emissions in CO2"]; // Convert to number
+        d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
       });
 
-      // Parse the urbanization data and remove NaN values
       urbanizationData.forEach(d => {
-        d.UrbanRate = +d["Population share in urban areas"]; // Convert to number
+        d.UrbanRate = +d["Population share in urban areas"];
       });
 
-      // Merge the two datasets by 'Entity' (assuming 'Entity' is the common key)
+      // Merge the two datasets by 'Entity' and log the process
       const mergedData = ghgData.map(d => {
         const urbanData = urbanizationData.find(u => u.Entity === d.Entity);
-        if (urbanData && !isNaN(d.Emissions) && !isNaN(urbanData.UrbanRate)) {
+        if (urbanData) {
+          console.log(`Found match: ${d.Entity}`); // Log matches
           return {
             ...d,
             UrbanRate: urbanData.UrbanRate
           };
+        } else {
+          console.log(`No match found for: ${d.Entity}`); // Log no matches
+          return null;
         }
-        return null;
-      }).filter(d => d !== null && !isNaN(d.Emissions) && !isNaN(d.UrbanRate)); // Remove null and NaN values
+      }).filter(d => d !== null && !isNaN(d.Emissions) && !isNaN(d.UrbanRate));
 
-      // Log merged data to check if any invalid entries were removed
-      console.log(mergedData.slice(0, 5)); // Log first 5 merged data points
+      console.log("Merged Data:", mergedData.slice(0, 5)); // Log the merged data
+
+      if (mergedData.length === 0) {
+        console.error("No data to display after merge. Check the entity matching.");
+        return;
+      }
 
       // Set up the SVG canvas
       const svg = d3.select("#GGScatter"),
@@ -602,7 +625,7 @@
       g.append("g")
         .call(d3.axisLeft(y));
 
-      // Dots (scatter plot points)
+      // Dots
       g.selectAll("circle")
         .data(mergedData)
         .enter().append("circle")
@@ -639,9 +662,6 @@
         .style("font-size", "18px")
         .style("font-weight", "bold")
         .text("Scatter Plot of GHG Emissions vs Urbanization Rate");
-
-    }).catch(error => {
-      console.error("Error loading data: ", error);
     });
   </script>
 
