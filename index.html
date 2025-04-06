@@ -545,7 +545,6 @@
     const ghgFile = "Datasets/greenhousegase/per-capita-ghg-emissions.csv";
     const urbanizationFile = "Datasets/Urbanization/urbanisation_cleaned_data.csv";
 
-    // Load both datasets
     Promise.all([d3.csv(ghgFile), d3.csv(urbanizationFile)]).then(([ghgData, urbanizationData]) => {
       // Parse the data
       ghgData.forEach(d => {
@@ -556,7 +555,7 @@
         d.UrbanRate = +d["Population share in urban areas"];
       });
 
-      // Merge the two datasets by 'Entity' (assuming 'Entity' is the common key)
+      // Merge the two datasets by 'Entity'
       const mergedData = ghgData.map(d => {
         const urbanData = urbanizationData.find(u => u.Entity === d.Entity);
         if (urbanData) {
@@ -566,7 +565,9 @@
           };
         }
         return null;
-      }).filter(d => d !== null); // Remove null values (no match in urbanization data)
+      }).filter(d => d !== null); // Remove null values
+
+      console.log(mergedData); // Log merged data for debugging
 
       // Set up the SVG canvas
       const svg = d3.select("#GGScatter"),
@@ -582,16 +583,16 @@
 
       // Set up the scales for the axes
       const x = d3.scaleLinear()
-        .domain([d3.min(mergedData, d => d.UrbanRate) - 5, d3.max(mergedData, d => d.UrbanRate) +
-          5
-        ])
+        .domain([d3.min(mergedData, d => d.UrbanRate) - 5, d3.max(mergedData, d => d.UrbanRate) + 5])
         .range([0, width]);
 
       const y = d3.scaleLinear()
-        .domain([d3.min(mergedData, d => d.Emissions) - 1, d3.max(mergedData, d => d.Emissions) +
-          1
-        ])
+        .domain([d3.min(mergedData, d => d.Emissions) - 1, d3.max(mergedData, d => d.Emissions) + 1])
         .range([height, 0]);
+
+      // Log domains for debugging
+      console.log(x.domain());
+      console.log(y.domain());
 
       // X Axis
       g.append("g")
