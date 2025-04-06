@@ -598,6 +598,7 @@
             };
           }
           return null;
+          console.log(null)
         }).filter(d => d !== null); // Remove null values
 
         console.log("Merged Data: ", mergedData); // Log merged data for debugging
@@ -636,16 +637,16 @@
           .data(mergedData)
           .enter().append("circle")
           .attr("cx", d => {
-            if (isNaN(d.UrbanRate) || d.UrbanRate === null) {
+            if (isNaN(d.UrbanRate) || d.UrbanRate === null || d.UrbanRate == " ") {
               console.error(`Skipping circle: Invalid Urban Rate for ${d.Entity} in year ${d.Year}`);
-              return null; // Skip invalid data
+              return 0;; // Skip invalid data
             }
             return x(d.UrbanRate);
           })
           .attr("cy", d => {
-            if (isNaN(d.Emissions) || d.Emissions === null) {
+            if (isNaN(d.Emissions) || d.Emissions === null || d.Emissions == " ") {
               console.error(`Skipping circle: Invalid Emissions for ${d.Entity} in year ${d.Year}`);
-              return null; // Skip invalid data
+              return 0;; // Skip invalid data
             }
             return y(d.Emissions);
           })
