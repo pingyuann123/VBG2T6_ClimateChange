@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>D3 Map with Line Chart</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      position: relative;
+    }
+
+    .tooltip {
+      position: absolute;
+      background: white;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      pointer-events: none;
+      font-size: 13px;
+      z-index: 50;
+    }
+
+    svg {
+      font: 12px sans-serif;
+    }
+
+    #map {
+      position: relative;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    #country-name {
+      font-size: 20px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #chart {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-sizing: border-box;
+      display: none;
+      z-index: 999;
+      transition: opacity 0.5s ease;
+    }
+
+    #chart svg {
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>🌍 Urbanization Rate Map</h2>
+  <div id="map"></div>
+  <div id="chart">
+    <div id="country-name"></div>
+    <div id="chart-container"></div>
+  </div>
+
+  <script>
+    const width = 900, height = 500;
+    const svg = d3.select("#map").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    const projection = d3.geoMercator().scale(130).translate([width / 2, height / 1.5]);
+    const path = d3.geoPath().projection(projection);
+
+    const tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
+
+    const colorScale = d3.scaleSequential(d3.interpolateReds).domain([0, 100]);
+
+    Promise.all([
+      d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
+      d3.csv("urban-rate.csv"),
+      d3.csv("urban-rate-by-year.csv")
+    ]).then(([geojson, latestData, yearData]) => {
+
+      const latestMap = {};
+      latestData.forEach(d => latestMap[d.country] = +d.urban_rate);
+
+
+      svg.selectAll("path")
+        .data(geojson.features)
+        .enter().append("path")
+        .attr("d", path)
+        .attr("fill", d => {
+          const rate = latestMap[d.properties.name];
+          return rate ? colorScale(rate) : "#eee";
+        })
+        .attr("stroke", "#fff")
+        .on("mouseover", function(event, d) {
+          const rate = latestMap[d.properties.name] || "N/A";
+          tooltip.transition().duration(200).style("opacity", 0.9);
+          tooltip.html(`<strong>${d.properties.name}</strong><br>Urban Rate: ${rate}%`)
+            .style("left", (event.pageX + 5) + "px")
+            .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", function() {
+          tooltip.transition().duration(300).style("opacity", 0);
+        })
+        .on("click", function(event, d) {
+          const country = d.properties.name;
+          d3.select("#country-name").text(`📈 Urbanization Trend for ${country}`);
+
+          // Check if the chart is already visible
+          const chartVisible = d3.select("#chart").style("display") === "block";
+          if (chartVisible) {
+            d3.select("#chart").style("display", "none");
+          } else {
+            drawLineChart(yearData.filter(row => row.country === country), event.pageX, event.pageY);
+          }
+        });
+
+        function drawLineChart(data, xPos, yPos) {
+        // Define chart dimensions
+        const chartWidth = 600;
+        const chartHeight = 300;
+
+        // Adjust chart position dynamically to avoid being cut off
+        const margin = { top: 20, right: 20, bottom: 40, left: 50 };
+        const width = chartWidth - margin.left - margin.right;
+        const height = chartHeight - margin.top - margin.bottom;
+
+        // Check for the available space on the screen to ensure the chart is not cut off
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        let adjustedXPos = xPos + 20; // Default position
+        let adjustedYPos = yPos - chartHeight / 2; // Default position
+
+        // If the chart would go off the right edge, move it to the left
+        if (adjustedXPos + chartWidth > screenWidth) {
+            adjustedXPos = screenWidth - chartWidth - 20;
+        }
+
+        // If the chart would go off the bottom edge, move it upwards
+        if (adjustedYPos + chartHeight > screenHeight) {
+            adjustedYPos = screenHeight - chartHeight - 20;
+        }
+
+        // Position the chart at the calculated position
+        d3.select("#chart")
+            .style("display", "block")
+            .style("left", `${adjustedXPos}px`)
+            .style("top", `${adjustedYPos}px`)
+            .style("opacity", 0)
+            .transition()
+            .duration(500)
+            .style("opacity", 1);
+
+        d3.select("#chart-container").selectAll("*").remove();
+
+        const svgLine = d3.select("#chart-container").append("svg")
+            .attr("width", chartWidth + margin.left + margin.right)
+            .attr("height", chartHeight + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        data = data.filter(d => d.year && d.urban_rate); // Clean data
+        data.forEach(d => {
+            d.year = +d.year;
+            d.urban_rate = +d.urban_rate;
+        });
+
+        const x = d3.scaleLinear()
+            .domain(d3.extent(data, d => d.year))
+            .range([0, width]);
+
+        const y = d3.scaleLinear()
+            .domain([0, d3.max(data, d => d.urban_rate)])
+            .nice()
+            .range([height, 0]);
+
+        // Axes
+        svgLine.append("g")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x).ticks(8).tickFormat(d3.format("d")));
+        svgLine.append("g").call(d3.axisLeft(y));
+
+        // Smooth Line generator using curveCardinal
+        const line = d3.line()
+            .x(d => x(d.year))
+            .y(d => y(d.urban_rate))
+            .curve(d3.curveCardinal); // Add smooth curves here
+
+        // Draw the line with animation (left to right)
+        const pathLine = svgLine.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "#007acc")
+            .attr("stroke-width", 2.5)
+            .attr("d", line);
+
+        // Animate line drawing
+        const totalLength = pathLine.node().getTotalLength();
+        pathLine
+            .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", totalLength)
+            .transition()
+            .duration(2000)
+            .ease(d3.easeLinear)
+            .attr("stroke-dashoffset", 0);
+
+        // Tooltip interaction on the line (show year and urban rate on hover)
+        pathLine.on("mouseover", function(event) {
+            const mouseX = event.offsetX - margin.left;
+            const mouseY = event.offsetY - margin.top;
+
+            // Find the closest point
+            let closestDataPoint = data[0];
+            let closestDistance = Infinity;
+
+            data.forEach(d => {
+                const xPos = x(d.year);
+                const yPos = y(d.urban_rate);
+
+                const distance = Math.sqrt(Math.pow(xPos - mouseX, 2) + Math.pow(yPos - mouseY, 2));
+
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestDataPoint = d;
+                }
+            });
+
+            // Show the tooltip with details
+            tooltip.transition().duration(200).style("opacity", 0.9).style("z-index", 1000); // Higher z-index
+            tooltip.html(`Year: ${closestDataPoint.year}<br>Urbanization Rate: ${closestDataPoint.urban_rate}%`)
+                .style("left", (event.pageX + 5) + "px") // Slight offset to the right of the mouse
+                .style("top", (event.pageY - 50) + "px"); // Increase top offset to place tooltip above the graph
+        })
+        .on("mousemove", function(event) {
+            const mouseX = event.offsetX - margin.left;
+            const mouseY = event.offsetY - margin.top;
+
+            // Find the closest point to update tooltip dynamically
+            let closestDataPoint = data[0];
+            let closestDistance = Infinity;
+
+            data.forEach(d => {
+                const xPos = x(d.year);
+                const yPos = y(d.urban_rate);
+
+                const distance = Math.sqrt(Math.pow(xPos - mouseX, 2) + Math.pow(yPos - mouseY, 2));
+
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestDataPoint = d;
+                }
+            });
+
+            // Update the tooltip with the new closest data
+            tooltip.html(`Year: ${closestDataPoint.year}<br>Urbanization Rate: ${closestDataPoint.urban_rate}%`)
+                .style("left", (event.pageX + 5) + "px") // Slight offset to the right of the mouse
+                .style("top", (event.pageY - 50) + "px"); // Slightly above the mouse
+        })
+        .on("mouseout", function() {
+            tooltip.transition().duration(300).style("opacity", 0).style("z-index", -1); // Hide tooltip and reset z-index
+        });
+    }
+
+    // Reset tooltip z-index when hovering over countries
+    svg.selectAll("path")
+        .on("mouseover", function(event, d) {
+            tooltip.transition().duration(200).style("opacity", 0.9).style("z-index", 1000); // Reset z-index for map hover
+            tooltip.html(`<strong>${d.properties.name}</strong><br>Urban Rate: ${latestMap[d.properties.name] || 'N/A'}%`)
+                .style("left", (event.pageX + 5) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", function() {
+            tooltip.transition().duration(300).style("opacity", 0).style("z-index", -1); // Reset z-index when moving away from country
+        });
+
+
+
+    });
+  </script>
+
+</body>
+</html>
