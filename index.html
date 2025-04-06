@@ -560,7 +560,7 @@
           d.Year = +d.Year;
           d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
           d.UrbanRate = +d["urban population (% of total population)"].replace('%', '').trim();
-
+          console.log(d.Year, d.Emissions, d.UrbanRate); // Log the parsed values for debugging
           // Check for invalid data and log errors
           if (isNaN(d.Emissions)) {
             console.error(`Invalid GHG Emissions for ${d.Entity} in year ${d.Year}`);
@@ -569,7 +569,7 @@
             console.error(`Invalid Urban Rate for ${d.Entity} in year ${d.Year}`);
           }
         });
-
+         // Log the cleaned data for debugging
         // Setup SVG canvas
         const svg = d3.select("#GGScatter"),
           margin = {
