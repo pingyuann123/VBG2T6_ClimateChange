@@ -645,7 +645,7 @@
         .enter().append("circle")
         .attr("fill-opacity", 0.5)
         .attr("stroke-width", "1px")
-        .attr("fill", d => c(d.Entity))
+        .attr("stroke", d => c(d.Entity))
         .attr("r", d => r(d.Emissions))
         .attr("cx", d => x(d.Emissions))
         .attr("cy", d => y(d.UrbanRate));
