@@ -543,7 +543,7 @@
 
     // File paths for the two CSV files
     const ghgFile = "Datasets/greenhousegase/per-capita-ghg-emissions.csv";
-    const urbanizationFile = "Datasets/Urbanization/share-of-population-urban.csv";
+    const urbanizationFile = "Datasets/Urbanization/urbanisation_cleaned_data.csv";
 
     // Load both datasets
     Promise.all([d3.csv(ghgFile), d3.csv(urbanizationFile)]).then(([ghgData, urbanizationData]) => {
