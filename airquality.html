@@ -65,19 +65,6 @@
         </div>
     </div>
 
-    <script>
-        function AQopenTab(event, tabId) {
-            const tabContents = document.querySelectorAll('.GGtab-content');
-            const tabButtons = document.querySelectorAll('.GGtab-button');
-
-            tabContents.forEach(tab => tab.classList.remove('active'));
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-    </script>
-
 </body>
 
 
