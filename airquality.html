@@ -18,16 +18,16 @@
             <h2>Air Quality</h2>
             <p>Why is air quality important?</p>
             <ul>
-                <li>Air quality is a crucial indicator of climate change because pollutants and greenhouse gases often share common sources...</li>
-                <li>Urbanization affects air pollutants via urban expansion and emission growth...</li>
+                <li>Air quality is a crucial indicator of climate change because pollutants and greenhouse gases often share common sources, and climate change can affect air quality both physically and chemically, while air pollutants can influence climate.</li>
+                <li>Urbanization affects air pollutants via urban expansion and emission growth, thereby inevitably changing the health risks involved with air pollutants. </li>
                 <li>The dense concentration of vehicles, industrial facilities and construction projects are huge sources of emissions.</li>
             </ul>
         </div>
 
         <!-- Air Quality Tab Buttons -->
         <div class="GGtab-buttons">
-            <button class="GGtab-button active" onclick="AQopenTab('AQPopulation')">Air Quality and Population Impact</button>
-            <button class="GGtab-button" onclick="AQopenTab('AQTrends')">Pollution Trends Across Regions</button>
+            <button class="GGtab-button active" onclick="AQopenTab(event, 'AQPopulation')">Air Quality and Population Impact</button>
+            <button class="GGtab-button" onclick="AQopenTab(event, 'AQTrends')">Pollution Trends Across Regions</button>            
         </div>
 
         <!-- Tab Content 1 -->
@@ -66,18 +66,18 @@
     </div>
 
     <script>
-        function AQopenTab(tabId) {
+        function AQopenTab(event, tabId) {
             const tabContents = document.querySelectorAll('.GGtab-content');
             const tabButtons = document.querySelectorAll('.GGtab-button');
-    
+
             tabContents.forEach(tab => tab.classList.remove('active'));
             tabButtons.forEach(btn => btn.classList.remove('active'));
-    
+
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
         }
     </script>
-    
+
 </body>
 
 
