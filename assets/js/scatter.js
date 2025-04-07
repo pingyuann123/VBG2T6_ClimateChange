@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to populate country filter dropdown with unique entities (countries)
     function populateCountryFilter(data) {
         const filterDropdown = document.getElementById("countryFilter");
+        console.log(filterDropdown);
         const countries = [...new Set(data.map(d => d.Entity))]; // Get unique countries
 
         countries.forEach(country => {
