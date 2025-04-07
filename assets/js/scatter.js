@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const scatter = plotArea.selectAll("circle")
             .data(data)
             .enter().append("circle")
-            .attr("fill-opacity", 0.7)
+            .attr("fill-opacity", 0)
             .attr("stroke-width", "1px")
             .attr("stroke", d => c(d.Entity))
             .attr("r", d => r(d.Emissions))
