@@ -13,7 +13,7 @@
       border-radius: 4px;
       pointer-events: none;
       font-size: 13px;
-      z-index: 9999;
+      z-index: 100000;
     }
 
     svg {
@@ -109,8 +109,7 @@
     }
 
     #close-chart {
-      background-color: #2C2F3E;
-      color: #9fa6b2;
+      color: darkgray;
       border: none;
       border-radius: 50%;
       width: 24px;
@@ -221,7 +220,7 @@
       .translate([width / 2, height / 1.5]);
     const path = d3.geoPath().projection(projection);
 
-    const tooltip = d3.select("#chart").append("div")
+    const tooltip = d3.select("body").append("div")
       .attr("class", "tooltip")
       .style("opacity", 0);
 
