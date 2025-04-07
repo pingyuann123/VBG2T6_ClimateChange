@@ -71,8 +71,34 @@
                                 <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
                                     <i class="bi bi-building flex-shrink-0"></i>
                                     <div>
-                                        <h3>Correlation Chart:</h3>
-                                        <p>Recommendation 1</p>
+                                        <h3>Correlation Chart with Country Filter:</h3>
+                                        <ul>
+                                            <li>
+                                                Shows correlation between average Urban Population Share &
+                                                average Per Capita Greenhouse Gas Emissions
+                                            </li>
+                                            <li>
+                                                Shows correlation between average Urban Population Share &
+                                                average Per Capita Greenhouse Gas Emissions
+                                            </li>
+                                            <li>
+                                                Higher urban population shares generally has higher per capita
+                                                emissions.
+                                            </li>
+                                            <li>
+                                                Trend line analysis (r-sq = 0.136, p value = < 0.0001), shows weak but
+                                                    exisiting correlation </li> <li>
+                                                    Highly urbanized nations such as Qatar, United Arab Emirates and
+                                                    Australia are positioned more towards the upper right —
+                                                    showing both high urbanization and high emissions per person.
+                                            </li>
+                                            <li>
+                                                Less urbanized countries such as South Sudan, cluster on the lower left,
+                                                showing both lower urban population shares and significantly lower
+                                                emissions.
+                                            </li>
+                                        </ul>
+
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +109,16 @@
                                     <i class="bi bi-building flex-shrink-0"></i>
                                     <div>
                                         <h3>Global Trend Analysis</h3>
-                                        <p>Recommendation 1</p>
+                                        <ul>
+                                            <li>
+                                                This illustrates the upward trend of total greenhouse gas emissions
+                                                globally from 1980s to 2023,
+                                                with a projection to 2030.
+                                            </li>
+                                            <li>
+                                                Emissions are forecasted to rise to more than 1 billion tonnes in 2030s
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -96,10 +131,7 @@
         <!--1st row-->
         <div id="GGDistribution" class="GGtab-content">
             <div class="row">
-
                 <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
-                    <!-- for a 1 row 2 chart way-->
-                    <!-- <h3 class="resume-title">1st chart</h3> -->
                     <div class='tableauPlaceholder'>
                         <tableau-viz id="gg3"
                             src='https://public.tableau.com/views/GreenhouseGasCountriesText/GreenhouseGasUrbanization'
@@ -109,12 +141,85 @@
                     </div>
 
                 </div>
-
-
-
             </div>
+            <div class="row">
+                <div class="contact section" id="recommendations">
+                    <p style="text-align: center; font-size:medium">Insights</p>
+                    <div class="row">
+                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="info-wrap">
+                                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                                    <i class="bi bi-building flex-shrink-0"></i>
+                                    <div>
+                                        <h3>Average Urban Population Share by Region (%)</h3>
+                                        <ul>
+                                            <li>
+                                                Paired with trend line analysis
+                                            </li>
+                                            <li>
+                                                Oceania has the highest average urbanization with 90.01 in 2023
+                                            </li>
+                                            <li>
+                                                Next are South America with 83.56 and Europe with 74.67
+                                            </li>
+                                        </ul>
 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="info-wrap">
+                                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                                    <i class="bi bi-building flex-shrink-0"></i>
+                                    <div>
+                                        <h3>% Total of Average Greenhouse Gas Emissions by region</h3>
+                                        <ul>
+                                            <li>
+                                                Paired with trend line analysis
+                                            </li>
+                                            <li>
+                                                Asia has the highest % total in average Greenhouse Gas Emissions contribution (295.9%). Almost 3 times higher than global average!
+                                            </li>
+                                            <li>
+                                                Oceania with 18.9%, Europe (75.5%) and Africa (41.8%) are in the lower range.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="info-wrap">
+                                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                                    <i class="bi bi-building flex-shrink-0"></i>
+                                    <div>
+                                        <h3>Text Table</h3>
+                                        <ul>
+                                            <li>
+                                                Looking into Europe, since it is a larger continent compared to oceania.
+                                            </li>
+                                            <li>
+                                                Iceland is the lowest contributor with the highest urbanization rate 
+                                                due to their efforts in using renewable energy from hydro and geothermal energy sources.
+                                            </li>
+                                            <li>
+                                                Other popular examples can also be seen from this table such as Switzerland, Denmark and Sweden. 
+                                                These countries are known for their efforts by using renewable energy sources and having a high urbanization rate.
+                                            </li>
+                                            <li>
+                                                In addition, Switzerland is under Paris Agreement and has a Swiss federal law that regulates carbon dioxide emissions to mitigate climate change.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <!--2nd row-->
         <div id="GGGasType" class="GGtab-content">
             <!-- <div class="GGmini-tab-buttons">
