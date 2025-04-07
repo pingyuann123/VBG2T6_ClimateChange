@@ -40,14 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    const countryFilter = document.getElementById("countryFilter");
-    console.log(countryFilter); // Debugging
-    
-    countryFilter.addEventListener("change", function () {
-        const selectedCountry = this.value;
-        update(selectedCountry); // Call your update function
-        console.log("Selected country:", selectedCountry); // Debugging
-    });
+
 
     // Function to populate country filter dropdown with unique entities (countries)
     function populateCountryFilter(data) {
@@ -175,4 +168,13 @@ document.addEventListener('DOMContentLoaded', function () {
             .attr("stroke-width", 1)
             .attr("d", trendLine);
     }
+
+    const countryFilter = document.getElementById("countryFilter");
+    console.log(countryFilter); // Debugging
+
+    countryFilter.addEventListener("change", function () {
+        const selectedCountry = this.value;
+        update(selectedCountry); // Call your update function
+        console.log("Selected country:", selectedCountry); // Debugging
+    });
 });
