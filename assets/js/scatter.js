@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to update scatter plot based on the selected country
     function update(selectedCountry) {
         // Load CSV data
+        const timestamp = new Date().getTime(); // Define timestamp here
+
         const csvUrl = `Datasets/combines.csv?timestamp=${timestamp}`;
 
         d3.csv(csvUrl).then(function (rawData) {
