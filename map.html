@@ -256,6 +256,37 @@
             .duration(2000)
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0);
+
+        // Tooltip interaction on the line (show year and urban rate on hover)
+        pathLine.on("mousemove", function(event) {
+            const mouseX = event.offsetX - margin.left;
+            const mouseY = event.offsetY - margin.top;
+
+            // Find the closest point
+            let closestDataPoint = data[0];
+            let closestDistance = Infinity;
+
+            data.forEach(d => {
+                const xPos = x(d.year);
+                const yPos = y(d.urban_rate);
+
+                const distance = Math.sqrt(Math.pow(xPos - mouseX, 2) + Math.pow(yPos - mouseY, 2));
+
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestDataPoint = d;
+                }
+            });
+
+            // Show the tooltip with details
+            tooltip.transition().duration(200).style("opacity", 0.9).style("z-index", 1000); // Higher z-index
+            tooltip.html(`Year: ${closestDataPoint.year}<br>Urbanization Rate: ${closestDataPoint.urban_rate.toFixed(2)}%`)
+                .style("left", (event.pageX + 5) + "px") // Slight offset to the right of the mouse
+                .style("top", (event.pageY - 50) + "px"); // Increase top offset to place tooltip above the graph
+        })
+        .on("mouseout", function() {
+            tooltip.transition().duration(300).style("opacity", 0).style("z-index", -1); // Hide tooltip and reset z-index
+        });
     }
 
     // Function to draw the pie chart for urban and rural populations
