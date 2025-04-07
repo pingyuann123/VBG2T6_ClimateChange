@@ -336,6 +336,29 @@
       </div>
       <!-- End Section Title -->
 
+      <!-- 🌍 Where the map.html content will be injected -->
+        <div id="urban-map-container"></div>
+      </section>
+
+      <!-- 🔁 Inject map.html dynamically -->
+      <script>
+        fetch('map.html')
+          .then(res => res.text())
+          .then(html => {
+            const container = document.getElementById('urban-map-container');
+            container.innerHTML = html;
+
+            // Re-run embedded scripts
+            const scripts = container.querySelectorAll("script");
+            scripts.forEach(oldScript => {
+              const newScript = document.createElement("script");
+              newScript.text = oldScript.text;
+              document.body.appendChild(newScript);
+            });
+          })
+          .catch(err => console.error("Failed to load map.html", err));
+      </script>
+
       <div class="container" id="urbanizationsection"></div>
 
     </section>
