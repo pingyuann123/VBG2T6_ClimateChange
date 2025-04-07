@@ -40,11 +40,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Dropdown event listener for country selection
-    d3.select("#countryFilter").on("change", function (d) {
-        const selectedCountry = d3.select(this).property("value");
-        update(selectedCountry); // Call the update function with the selected country
-        console.log(selectedCountry); // Log the selected country for debugging
+    const countryFilter = document.getElementById("countryFilter");
+
+    countryFilter.addEventListener("change", function () {
+        const selectedCountry = this.value;
+        update(selectedCountry); // Call your update function
+        console.log("Selected country:", selectedCountry); // Debugging
     });
 
     // Function to populate country filter dropdown with unique entities (countries)
