@@ -49,9 +49,9 @@
     }
 
     #chart {
-        position: fixed;
-        top: 50%;
-        right: 40px;
+        /* position: fixed; */
+        /* top: 50%;
+        right: 40px; */
         transform: translateY(-50%);
         width: 500px;
         background-color: rgba(255, 255, 255, 0.95);
@@ -87,9 +87,9 @@
         flex-shrink: 0;
         }
 
-    #line-chart {
+    /* #line-chart {
     flex: 1;
-    }
+    } */
 
 
     #line-chart {
@@ -127,6 +127,35 @@
       background-color: #414457;
       color: #ffffff;
     }
+
+    /* Container that holds both map and chart */
+    #urban-map-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    }
+
+    /* The map itself */
+    #map {
+    flex: 1;
+    max-width: 900px;
+    }
+
+    /* The floating chart panel */
+    #chart {
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: none;
+    z-index: 999;
+    border: 1px solid #ccc;
+    }
+
   </style>
 
 <div id="urban-map-wrapper"></div>
