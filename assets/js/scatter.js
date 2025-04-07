@@ -1,4 +1,4 @@
-function makeChart(data) {
+async function makeChart(data) {
     const svgWidth = 800,
         svgHeight = 800;
     const margin = {
