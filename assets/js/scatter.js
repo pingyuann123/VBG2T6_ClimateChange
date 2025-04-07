@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
     d3.select("#countryFilter").on("change", function (d) {
         const selectedCountry = d3.select(this).property("value");
         update(selectedCountry); // Call the update function with the selected country
+        console.log(selectedCountry); // Log the selected country for debugging
     });
 
     // Function to populate country filter dropdown with unique entities (countries)
