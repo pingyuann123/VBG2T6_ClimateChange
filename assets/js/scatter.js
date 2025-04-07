@@ -72,13 +72,13 @@ document.addEventListener('DOMContentLoaded', function () {
     function makeChart(data) {
 
 
-        const svgWidth = 800,
-            svgHeight = 800;
+        const svgWidth = 1000,
+            svgHeight = 1000;
         const margin = {
             top: 40,
-            right: 40,
+            right: 10,
             bottom: 50,
-            left: 60
+            left: 10
         };
         const width = svgWidth - margin.left - margin.right;
         const height = svgHeight - margin.top - margin.bottom;
