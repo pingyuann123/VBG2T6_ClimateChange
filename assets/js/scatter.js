@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const countryFilter = document.getElementById("countryFilter");
-
+    console.log(countryFilter); // Debugging
+    
     countryFilter.addEventListener("change", function () {
         const selectedCountry = this.value;
         update(selectedCountry); // Call your update function
