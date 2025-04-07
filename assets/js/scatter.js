@@ -70,11 +70,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Scatter plot rendering function
     function makeChart(data) {
-        plotArea.selectAll("*").remove();
-        canvas.selectAll("text").remove(); // Optional: remove old axis labels
-        canvas.selectAll("path").remove(); // Optional: remove old trend line
-        canvas.selectAll("circle").remove(); // Optional: remove old circles
-        
+
+
         const svgWidth = 800,
             svgHeight = 800;
         const margin = {
@@ -93,6 +90,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const plotArea = canvas.append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
+        plotArea.selectAll("*").remove();
+        canvas.selectAll("text").remove(); // Optional: remove old axis labels
+        canvas.selectAll("path").remove(); // Optional: remove old trend line
+        canvas.selectAll("circle").remove(); // Optional: remove old circles
 
 
         // Scale
