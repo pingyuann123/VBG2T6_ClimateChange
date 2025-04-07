@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 Emissions: values.Emissions,
                 UrbanRate: values.UrbanRate
             }));
-            
+
             console.log(averagedData); // Log the averaged data for debugging
 
             // Call the function to render the chart with the filtered data
@@ -86,7 +86,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const plotArea = canvas.append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        // Scales
+        plotArea.selectAll("*").remove();
+        canvas.selectAll("text").remove(); // Optional: remove old axis labels
+
+        // Scale
         const x = d3.scaleLinear()
             .domain([0, d3.max(data, d => d.UrbanRate) + 5])
             .range([0, width]);
