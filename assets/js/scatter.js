@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (selectedCountry !== "All") {
                 filteredData = rawData.filter(d => d.Entity === selectedCountry);
             }
-
+            console.log(filteredData); // Log the filtered data for debugging
+            console.log(selectedCountry); // Log the selected country for debugging
             // Group by Entity and calculate average emissions and urban rate
             const grouped = d3.rollups(
                 filteredData,
