@@ -1,7 +1,4 @@
  document.addEventListener('DOMContentLoaded', function () {
-
-    document.getElementById("clearFilter").addEventListener("click", clearCountryFilter);
-
      // scatter.js code here
      function makeChart(data) {
          const svgWidth = 800,
@@ -148,80 +145,6 @@
 
      });
 
-     // Function to update scatter plot
-     function update(selectedCountry) {
-         // Load CSV data
-         d3.csv("Datasets/combines.csv").then(function (rawData) {
-             // Convert columns to numbers first
-             rawData.forEach(d => {
-                 d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
-                 d.UrbanRate = +d["urban population (% of total population)"];
-             });
-
-             // Filter data based on selected country or show all if 'All' is selected
-             let filteredData = rawData;
-             if (selectedCountry !== "All") {
-                 filteredData = rawData.filter(d => d.Entity === selectedCountry);
-             }
-
-             // Group by Entity and calculate average emissions and urban rate
-             const grouped = d3.rollups(
-                 filteredData,
-                 v => ({
-                     Emissions: d3.mean(v, d => d.Emissions),
-                     UrbanRate: d3.mean(v, d => d.UrbanRate)
-                 }),
-                 d => d.Entity
-             );
-
-             // Transform back into an array of objects
-             const averagedData = grouped.map(([Entity, values]) => ({
-                 Entity: Entity,
-                 Emissions: values.Emissions,
-                 UrbanRate: values.UrbanRate
-             }));
-
-             // Re-render the chart with the filtered data
-             makeChart(averagedData);
-         });
-     }
-
-     // Dropdown event listener for country selection
-     d3.select("#countryFilter").on("change", function (d) {
-         const selectedCountry = d3.select(this).property("value");
-         update(selectedCountry); // Call the update function with the selected country
-     });
-
-     // Function to clear filter and re-render all data
-     function clearCountryFilter() {
-         // Reset filter to 'All'
-         const filterDropdown = document.getElementById("countryFilter");
-         filterDropdown.value = "All";
-
-         // Re-render the chart with all data
-         update("All"); // Show all data
-     }
-
-     // Attach event to the "Clear Filter" button
-
-     // Populate country filter dropdown
-     function populateCountryFilter(data) {
-         const filterDropdown = document.getElementById("countryFilter");
-         const countries = [...new Set(data.map(d => d.Entity))]; // Get unique countries
-
-         countries.forEach(country => {
-             const option = document.createElement("option");
-             option.value = country;
-             option.textContent = country;
-             filterDropdown.appendChild(option);
-         });
-     }
-
-     // Initial data load and populate dropdown
-     d3.csv("Datasets/combines.csv").then(function (rawData) {
-         populateCountryFilter(rawData);
-         update("All"); // Initially show all data
-     });
-
+     
 
  });
