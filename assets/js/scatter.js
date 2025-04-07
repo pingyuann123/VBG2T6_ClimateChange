@@ -54,6 +54,12 @@ document.addEventListener('DOMContentLoaded', function () {
             option.textContent = country;
             filterDropdown.appendChild(option);
         });
+        // Now that the dropdown is populated, add the event listener
+        filterDropdown.addEventListener("change", function () {
+            const selectedCountry = this.value;
+            update(selectedCountry); // Call your update function
+            console.log("Selected country:", selectedCountry); // Debugging
+        });
     }
 
     // Initial data load and populate dropdown
@@ -169,12 +175,12 @@ document.addEventListener('DOMContentLoaded', function () {
             .attr("d", trendLine);
     }
 
-    const countryFilter = document.getElementById("countryFilter");
-    console.log(countryFilter); // Debugging
+    // const countryFilter = document.getElementById("countryFilter");
+    // console.log(countryFilter); // Debugging
 
-    countryFilter.addEventListener("change", function () {
-        const selectedCountry = this.value;
-        update(selectedCountry); // Call your update function
-        console.log("Selected country:", selectedCountry); // Debugging
-    });
+    // countryFilter.addEventListener("change", function () {
+    //     const selectedCountry = this.value;
+    //     update(selectedCountry); // Call your update function
+    //     console.log("Selected country:", selectedCountry); // Debugging
+    // });
 });
