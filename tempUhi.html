@@ -13,88 +13,61 @@
 
 <body>
   <div class="container" id="tempUHIsection">
-    <div class="tab-container">
-      <!-- Tab Buttons -->
-      <div class="tab-buttons">
-        <button class="tab-button active" onclick="openTab('benefits')">Temperature Trends</button>
-        <button class="tab-button" onclick="openTab('drawbacks')">UHI Trends</button>
-      </div>
-    </div>
-    <!-- Tab Contents -->
-    <div id="benefits" class="tab-content active">
-      <p>short text here about overall temp and uhi..</p>
-      <div class="row">
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <!-- for a 1 row 2 chart way-->
-          <h3 class="resume-title">Overall Temperature Trends</h3>
-
-          <div class="resume-item">
-            <div id='imp1' class='tableauPlaceholder'>
-              <tableau-viz id="urb2"
-                src='https://public.tableau.com/views/GlobalTempMap/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link'
-                hide-tabs style="width: 100%; height: 100%;">
-              </tableau-viz>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-          <!-- for a 1 row 2 chart way-->
-          <h3 class="resume-title">Overall UHI Trends</h3>
-          <div class="resume-item">
-            <div id='imp2' class='tableauPlaceholder'>
-              <tableau-viz id="urb2" src='https://public.tableau.com/shared/HMK8BZ9F7?:display_count=n&:origin=viz_share_link' hide-tabs
-                style="width: 100%; height: 100%;">
-              </tableau-viz>
-            </div>
-          </div>
-          <!-- End dashbaord Item -->
-        </div>
-      </div>
-    </div>
-    <!--1st row-->
-
-
-    <!--2nd row-->
     <!-- Tab Buttons -->
-    <div class="tab-buttons">
-        <button class="tab-button active" onclick="openTab('benefits')">Temperature Trends</button>
-        <button class="tab-button" onclick="openTab('drawbacks')">UHI Trends</button>
+    <div class="tab-container">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab('tempTrends')">Temperature Trends</button>
+        <button class="tab-button" onclick="openTab('uhiTrends')">UHI Trends</button>
       </div>
     </div>
+
     <!-- Tab Contents -->
-    <div id="benefits" class="tab-content active">
-      <p>short text here about overall temp and uhi..</p>
+    <div id="tempTrends" class="tab-content active">
+      <p>Short text here about overall temperature trends...</p>
       <div class="row">
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <!-- for a 1 row 2 chart way-->
           <h3 class="resume-title">Overall Temperature Trends</h3>
-
           <div class="resume-item">
-            <div id='imp1' class='tableauPlaceholder'>
-              <tableau-viz id="urb2"
-                src='https://public.tableau.com/views/GlobalTempMap/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link'
-                hide-tabs style="width: 100%; height: 100%;">
-              </tableau-viz>
+            <div id="imp1" class="tableauPlaceholder">
+              <tableau-viz id="urb1" src="https://public.tableau.com/views/GlobalTempMap/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
             </div>
           </div>
         </div>
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-          <!-- for a 1 row 2 chart way-->
           <h3 class="resume-title">Overall UHI Trends</h3>
           <div class="resume-item">
-            <div id='imp2' class='tableauPlaceholder'>
-              <tableau-viz id="urb2" src='https://public.tableau.com/shared/HMK8BZ9F7?:display_count=n&:origin=viz_share_link' hide-tabs
-                style="width: 100%; height: 100%;">
-              </tableau-viz>
+            <div id="imp2" class="tableauPlaceholder">
+              <tableau-viz id="urb2" src="https://public.tableau.com/shared/HMK8BZ9F7?:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
             </div>
           </div>
-          <!-- End dashboard Item -->
         </div>
       </div>
     </div>
-    <!--2nd row-->
 
-    
+    <div id="uhiTrends" class="tab-content">
+      <p>Short text here about UHI trends...</p>
+      <div class="row">
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="resume-title">UHI Intensity Trends</h3>
+          <div class="resume-item">
+            <div id="imp1" class="tableauPlaceholder">
+              <tableau-viz id="urb3" src="https://public.tableau.com/views/GlobalTempMap/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="resume-title">UHI Regional Impacts</h3>
+          <div class="resume-item">
+            <div id="imp2" class="tableauPlaceholder">
+              <tableau-viz id="urb4" src="https://public.tableau.com/shared/HMK8BZ9F7?:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <script>
     function openTab(tabName) {
       // Hide all tab contents
@@ -102,20 +75,6 @@
 
       // Remove active class from all buttons
       document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
-
-      // Show the selected tab content
-      document.getElementById(tabName).classList.add('active');
-
-      // Add active class to the clicked button
-      event.currentTarget.classList.add('active');
-    }
-
-    function openMiniTab(tabName) {
-      // Hide all tab contents
-      document.querySelectorAll('.mini-tab-content').forEach(tab => tab.classList.remove('active'));
-
-      // Remove active class from all buttons
-      document.querySelectorAll('.mini-tab-button').forEach(button => button.classList.remove('active'));
 
       // Show the selected tab content
       document.getElementById(tabName).classList.add('active');
