@@ -171,6 +171,16 @@
   gap: 20px;
 }
 
+#pie-chart svg {
+  width: 150px !important;
+  height: 150px !important;
+}
+
+#line-chart svg {
+  width: 300px !important;
+  height: 180px !important;
+}
+
 
 
   </style>
@@ -324,7 +334,7 @@
       }
 
       function drawLineChart(data) {
-        const chartWidth = 600, chartHeight = 300;
+        const chartWidth = 300, chartHeight = 180;
         const margin = { top: 20, right: 20, bottom: 40, left: 50 };
         const innerWidth = chartWidth - margin.left - margin.right;
         const innerHeight = chartHeight - margin.top - margin.bottom;
@@ -410,7 +420,7 @@
       }
 
       function drawPieChart(urbanRate, ruralRate) {
-        const width = 200, height = 200;
+        const width = 150, height = 150;
         const radius = Math.min(width, height) / 2;
 
         const svgPie = d3.select("#pie-chart").append("svg")
