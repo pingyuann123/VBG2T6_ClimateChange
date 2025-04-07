@@ -88,9 +88,9 @@ document.addEventListener('DOMContentLoaded', function () {
             .attr("height", svgHeight);
 
         canvas.selectAll("text").remove(); // Optional: remove old axis labels
-        canvas.selectAll("path").remove(); // Optional: remove old trend line
         canvas.selectAll("circle").remove(); // Optional: remove old circles
         canvas.selectAll("*").remove();
+        canvas.selectAll("path").remove(); // Optional: remove old trend line
 
 
         const plotArea = canvas.append("g")
