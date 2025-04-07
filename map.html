@@ -13,7 +13,7 @@
       border-radius: 4px;
       pointer-events: none;
       font-size: 13px;
-      z-index: 50;
+      z-index: 10001,
     }
 
     svg {
@@ -221,7 +221,7 @@
       .translate([width / 2, height / 1.5]);
     const path = d3.geoPath().projection(projection);
 
-    const tooltip = d3.select("body").append("div")
+    const tooltip = d3.select("#chart").append("div")
       .attr("class", "tooltip")
       .style("opacity", 0);
 
