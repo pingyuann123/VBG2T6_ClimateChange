@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const plotArea = canvas.append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
+        
+        
+        plotArea.selectAll("*").remove();
 
         // Scales
         const x = d3.scaleLinear()
