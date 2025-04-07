@@ -51,10 +51,9 @@
     #chart {
         position: fixed;
         top: 50%;
-        right: 20px;
+        right: 40px;
         transform: translateY(-50%);
-        width: 400px;
-        max-width: 90%;
+        width: 500px;
         background-color: rgba(255, 255, 255, 0.95);
         padding: 20px;
         border-radius: 10px;
@@ -62,6 +61,7 @@
         display: none;
         z-index: 999;
         }
+
 
 
 
@@ -73,18 +73,24 @@
     }
 
     #chart-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px;
+    display: flex;
+    flex-direction: row; /* <--- horizontal layout */
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
     }
 
+
     #pie-chart {
-      width: 200px;
-      height: 200px;
-      margin-bottom: 20px;
+        width: 180px;
+        height: 180px;
+        flex-shrink: 0;
+        }
+
+    #line-chart {
+    flex: 1;
     }
+
 
     #line-chart {
       width: 600px;
