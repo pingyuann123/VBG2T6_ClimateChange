@@ -9,6 +9,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+  <style>
+    /* Ensure the tableau viz takes full width */
+    .tableauPlaceholder {
+      width: 100% !important;
+      height: 500px; /* Adjust height as needed */
+    }
+
+    /* Ensure that overall temp section is full-width */
+    .tab-content {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Adjust column widths to allow the chart to take full width */
+    .col-lg-6 {
+      width: 100%;
+      padding: 0; /* Remove padding */
+    }
+  </style>
 </head>
 
 <body>
@@ -25,7 +44,7 @@
     <div id="tempTrends" class="tab-content active">
       <p>Short text here about overall temperature trends...</p>
       <div class="row">
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
           <h3 class="resume-title">Overall Temperature Trends</h3>
           <div class="resume-item">
             <div id="imp1" class="tableauPlaceholder">
