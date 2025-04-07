@@ -2,7 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to update scatter plot based on the selected country
     function update(selectedCountry) {
         // Load CSV data
-        d3.csv("Datasets/combines.csv").then(function (rawData) {
+        const csvUrl = `Datasets/combines.csv?timestamp=${timestamp}`;
+
+        d3.csv(csvUrl).then(function (rawData) {
             // Convert columns to numbers first
             rawData.forEach(d => {
                 d.Emissions = +d["Per capita greenhouse gas emissions in CO2"];
@@ -72,8 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function makeChart(data) {
 
 
-        const svgWidth = 900,
-            svgHeight = 900;
+        const svgWidth = 700,
+            svgHeight = 700;
         const margin = {
             top: 40,
             right: 40,
