@@ -9,6 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+    <style>
+        .GGtab-content {
+          display: none;
+        }
+      
+        .GGtab-content.active {
+          display: block;
+        }
+      
+        .GGtab-button.active {
+          background-color: #e0e0e0; /* optional: highlights selected tab */
+        }
+      </style>
 </head>
 
 <body>
@@ -64,6 +77,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function AQopenTab(event, tabId) {
+            const tabContents = document.querySelectorAll('.GGtab-content');
+            const tabButtons = document.querySelectorAll('.GGtab-button');
+
+            tabContents.forEach(tab => tab.classList.remove('active'));
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 
 </body>
 
