@@ -1,4 +1,7 @@
  document.addEventListener('DOMContentLoaded', function () {
+
+    document.getElementById("clearFilter").addEventListener("click", clearCountryFilter);
+
      // scatter.js code here
      function makeChart(data) {
          const svgWidth = 800,
@@ -200,7 +203,6 @@
      }
 
      // Attach event to the "Clear Filter" button
-     document.getElementById("clearFilter").addEventListener("click", clearCountryFilter);
 
      // Populate country filter dropdown
      function populateCountryFilter(data) {
