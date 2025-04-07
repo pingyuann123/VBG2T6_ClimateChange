@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 Emissions: values.Emissions,
                 UrbanRate: values.UrbanRate
             }));
+            
+            console.log(averagedData); // Log the averaged data for debugging
 
             // Call the function to render the chart with the filtered data
             makeChart(averagedData);
