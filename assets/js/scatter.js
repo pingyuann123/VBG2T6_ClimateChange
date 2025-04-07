@@ -87,13 +87,17 @@ document.addEventListener('DOMContentLoaded', function () {
             .attr("width", svgWidth)
             .attr("height", svgHeight);
 
+        canvas.selectAll("text").remove(); // Optional: remove old axis labels
+        canvas.selectAll("path").remove(); // Optional: remove old trend line
+        canvas.selectAll("circle").remove(); // Optional: remove old circles
+        canvas.selectAll("*").remove();
+
+
         const plotArea = canvas.append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
         plotArea.selectAll("*").remove();
-        canvas.selectAll("text").remove(); // Optional: remove old axis labels
-        canvas.selectAll("path").remove(); // Optional: remove old trend line
-        canvas.selectAll("circle").remove(); // Optional: remove old circles
+
 
 
         // Scale
