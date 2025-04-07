@@ -50,18 +50,19 @@
 
     #chart {
         position: fixed;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        width: 400px;
+        max-width: 90%;
         background-color: rgba(255, 255, 255, 0.95);
         padding: 20px;
         border-radius: 10px;
         box-sizing: border-box;
         display: none;
         z-index: 999;
-        left: 10%; /* Shift leftward from center */
-        top: 50%;
-        transform: translate(-30%, -50%);
-        width: 700px;
-        max-width: 90%;
-    }
+        }
+
 
 
     #country-name {
@@ -160,12 +161,12 @@
 
     const colorScale = d3.scaleSequential(d3.interpolateReds).domain([0, 100]);
 
-    const zoom = d3.zoom()
-      .scaleExtent([1, 8])
-      .on("zoom", (event) => {
-        svg.attr("transform", event.transform);
-      });
-    svg.call(zoom);
+    // const zoom = d3.zoom()
+    //   .scaleExtent([1, 8])
+    //   .on("zoom", (event) => {
+    //     svg.attr("transform", event.transform);
+    //   });
+    // svg.call(zoom);
 
     Promise.all([
       d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
