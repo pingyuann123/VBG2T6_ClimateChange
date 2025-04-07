@@ -9,19 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-    <style>
-        .AQtab-content {
-          display: none;
-        }
-      
-        .AQtab-content.active {
-          display: block;
-        }
-      
-        .AQtab-button.active {
-          background-color: #e0e0e0; /* optional: highlights selected tab */
-        }
-      </style>
 </head>
 
 <body>
@@ -31,25 +18,24 @@
             <h2>Air Quality</h2>
             <p>Why is air quality important?</p>
             <ul>
-                <li>Air quality is a crucial indicator of climate change because pollutants and greenhouse gases often share common sources, and climate change can affect air quality both physically and chemically, while air pollutants can influence climate.</li>
-                <li>Urbanization affects air pollutants via urban expansion and emission growth, thereby inevitably changing the health risks involved with air pollutants. </li>
-                <li>The dense concentration of vehicles, industrial facilities and construction projects are huge sources of emissions.</li>
+                <li>Air quality is a crucial indicator of climate change because pollutants and greenhouse gases often
+                    share common sources, and climate change can affect air quality both physically and chemically,
+                    while air pollutants can influence climate.</li>
+                <li>Urbanization affects air pollutants via urban expansion and emission growth, thereby inevitably
+                    changing the health risks involved with air pollutants.</li>
+                <li>The dense concentration of vehicles, industrial facilities and construction projects are huge
+                    sources of emissions.</li>
             </ul>
         </div>
 
-        <!-- Air Quality Tab Buttons -->
-        <div class="AQtab-buttons">
-            <button class="AQtab-button active" onclick="AQopenTab(event, 'AQPopulation')">Air Quality and Population Impact</button>
-            <button class="AQtab-button" onclick="AQopenTab(event, 'AQTrends')">Pollution Trends Across Regions</button>            
-        </div>
-
-        <!-- Tab Content 1 -->
-        <div id="AQPopulation" class="GGtab-content active">
+        <div class="container">
+            <!-- 1st row -->
             <div class="row">
                 <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="resume-title">Air Quality and Population Impact</h3>
                     <div class="resume-item">
-                        <div class='tableauPlaceholder'>
+                        <!-- Insert chart or content here -->
+                        <div id='aq1' class='tableauPlaceholder'>
                             <tableau-viz id="aq1"
                                 src='https://public.tableau.com/views/First_17438272241860/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link'
                                 style="width: 100%; height: 100%;">
@@ -58,15 +44,14 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Tab Content 2 -->
-        <div id="AQTrends" class="GGtab-content">
+            <!-- 2nd row -->
             <div class="row">
                 <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="resume-title">Pollution Trends Across Regions</h3>
                     <div class="resume-item">
-                        <div class='tableauPlaceholder'>
+                        <!-- Insert chart or content here -->
+                        <div id='aq2' class='tableauPlaceholder'>
                             <tableau-viz id="aq2"
                                 src='https://public.tableau.com/shared/4TRS6NWMD?:display_count=n&:origin=viz_share_link'
                                 style="width: 100%; height: 100%;">
@@ -77,21 +62,8 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function AQopenTab(event, tabId) {
-            const tabContents = document.querySelectorAll('.GGtab-content');
-            const tabButtons = document.querySelectorAll('.GGtab-button');
-
-            tabContents.forEach(tab => tab.classList.remove('active'));
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-    </script>
+    <!-- /Air Section -->
 
 </body>
-
 
 </html>
