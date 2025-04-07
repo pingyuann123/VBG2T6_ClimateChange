@@ -65,9 +65,12 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Selected country:", selectedCountry); // Debugging
         });
     }
+    
+    const timestamp = new Date().getTime(); // Define timestamp here
 
+    const csvUrl = `Datasets/combines.csv?timestamp=${timestamp}`;
     // Initial data load and populate dropdown
-    d3.csv("Datasets/combines.csv").then(function (rawData) {
+    d3.csv(csvUrl).then(function (rawData) {
         populateCountryFilter(rawData); // Populate the dropdown with countries
         update("All"); // Initially, show all data
     });

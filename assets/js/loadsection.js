@@ -31,7 +31,7 @@ function loadSection(url, targetId) {
 
 function loadScatterScript() {
   const script = document.createElement('script');
-  script.src = './scatter.js'; // path to your scatter.js
+  script.src = './scatter.js?t=${new Date().getTime()}'; // path to your scatter.js
   document.body.appendChild(script);
 }
 
