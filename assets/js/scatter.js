@@ -112,10 +112,6 @@ function makeChart(data) {
         );
 }
 
-
-
-
-
 // Load CSV and convert values
 d3.csv("Datasets/combines.csv").then(function (rawData) {
     // Convert columns to numbers first
