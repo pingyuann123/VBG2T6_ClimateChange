@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Load CSV data
         const timestamp = new Date().getTime(); // Define timestamp here
 
-        const csvUrl = `Datasets/combines.csv?timestamp=${timestamp}`;
+        const csvUrl = `Datasets/GGcombined.csv?timestamp=${timestamp}`;
 
         d3.csv(csvUrl).then(function (rawData) {
             // Convert columns to numbers first
@@ -65,10 +65,10 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Selected country:", selectedCountry); // Debugging
         });
     }
-    
+
     const timestamp = new Date().getTime(); // Define timestamp here
 
-    const csvUrl = `Datasets/combines.csv?timestamp=${timestamp}`;
+    const csvUrl = `Datasets/GGcombined.csv?timestamp=${timestamp}`;
     // Initial data load and populate dropdown
     d3.csv(csvUrl).then(function (rawData) {
         populateCountryFilter(rawData); // Populate the dropdown with countries
