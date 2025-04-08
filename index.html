@@ -660,7 +660,8 @@
         // Set the default tab to be open on page load
         window.onload = function() {
             document.getElementById("AQPopulation").style.display = "block";
-            document.getElementsByClassName("AQtab-button")[0].classList.add("active");}
+            document.getElementsByClassName("AQtab-button")[0].classList.add("active");
+            window.dispatchEvent(new Event('resize'));}
         };
 
   </script>
