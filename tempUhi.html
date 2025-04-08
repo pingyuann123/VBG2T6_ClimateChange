@@ -1,122 +1,150 @@
-<!DOCTYPE HTML>
-<html>
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-  <style>
-    /* Ensure the tableau viz takes full width */
-    .tableauPlaceholder {
-      width: 100% !important;
-      height: 500px; /* Adjust height as needed */
-    }
-
-    /* Ensure that overall temp section is full-width */
-    .tab-content {
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    /* Adjust column widths to allow the chart to take full width */
-    .col-lg-12 {
-      width: 100%;
-      padding: 0; /* Remove padding */
-    }
-
-    .col-lg-6 {
-      width: 100%;
-      padding: 0; /* Ensure this is also full-width */
-    }
-  </style>
-</head>
-
 <body>
-  <div class="container" id="tempUHIsection">
-    <!-- Tab Buttons -->
-    <div class="tab-container">
-      <div class="tab-buttons">
-        <button class="tab-button active" onclick="openTab('tempTrends')">Temperature Trends</button>
-        <button class="tab-button" onclick="openTab('uhiTrends')">UHI Trends</button>
-      </div>
-    </div>
-
-    <!-- Tab Contents -->
-    <div id="tempTrends" class="tab-content active">
-      <p>Short text here about overall temperature trends...</p>
-      <div class="row">
-        <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="resume-title">Temperature Trends by Country</h3>
-          <div class="resume-item">
-            <div id="imp1" class="tableauPlaceholder">
-              <tableau-viz id="urb1" src="https://public.tableau.com/views/GlobalTempMap/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
-            </div>
-          </div>
+    <div class="container" id="tempUHIsection">
+      <!-- Tab Buttons -->
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-button active" onclick="openTab('tempTrends')">Temperature Trends</button>
+          <button class="tab-button" onclick="openTab('uhiTrends')">UHI Trends</button>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+  
+      <!-- Tab Contents -->
+      <div id="tempTrends" class="tab-content active">
           <h3 class="resume-title">Impact of Urbanization on Temperature: Does Urban Growth Contribute to Rising Temperatures?</h3>
-          <div class="resume-item">
-            <div id="imp2" class="tableauPlaceholder">
-              <tableau-viz id="urb2" src="https://public.tableau.com/views/AvgTempbyRegionTop10HottestCountries/Dashboard3?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
-            <!-- <h3 class="resume-title">Impact of Urbanization on Temperature: Does Urban Growth Contribute to Rising Temperatures?</h3> -->
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="resume-title">Temperature Trends by Country</h2>
             <div class="resume-item">
-              <div id="imp3" class="tableauPlaceholder">
-                <tableau-viz id="urb2" src="https://public.tableau.com/views/UrbanPopulationvsTemperatureScatterPlot/Dashboard2?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
+              <div id="imp1" class="tableauPlaceholder">
+                <tableau-viz id="urb1" src="https://public.tableau.com/views/GlobalTempMap/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
+              </div>
+            </div>
+            <!-- Insights Section -->
+            <div class="contact section" id="insights1" style="padding-left:10px; padding-right:10px;">
+              <h3 style="text-align: center; font-size:large; padding-bottom:30px;">Insights</h3>
+              <div class="row">
+                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+                  <div class="info-wrap">
+                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                      <i class="bi bi-info-circle flex-shrink-0"></i>
+                      <div>
+                        <h3>Impact of Urbanization on Temperature</h3>
+                        <ul>
+                          <li>Higher urbanization correlates with increased average temperatures.</li>
+                          <li>Urbanization accelerates local climate changes through the urban heat island (UHI) effect.</li>
+                          <li>Regions with high urban growth tend to experience more extreme temperature variations.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-      </div>
-    </div>
-
-    <div id="uhiTrends" class="tab-content">
-      <p>Short text here about UHI trends...</p>
-      <div class="row">
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="resume-title">UHI Intensity Trends</h3>
-          <div class="resume-item">
-            <div id="imp3" class="tableauPlaceholder">
-              <tableau-viz id="urb3" src="https://public.tableau.com/views/GlobalTempMap/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
+        </div>
+        
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+              <br>
+            <h2 class="resume-title">Average Temperature by Region & Top 10 Hottest Countries</h2>
+            <div class="resume-item">
+              <div id="imp2" class="tableauPlaceholder">
+                <tableau-viz id="urb2" src="https://public.tableau.com/views/AvgTempbyRegionTop10HottestCountries/Dashboard3?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
+              </div>
+            </div>
+            <!-- Insights Section -->
+            <div class="contact section" id="insights2" style="padding-left:10px; padding-right:10px;">
+              <h3 style="text-align: center; font-size:large; padding-bottom:30px;">Insights</h3>
+              <div class="row">
+                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+                  <div class="info-wrap">
+                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                      <i class="bi bi-info-circle flex-shrink-0"></i>
+                      <div>
+                        <h3>Global Temperature Insights</h3>
+                        <ul>
+                          <li>The hottest countries are concentrated in tropical regions, often near the equator.</li>
+                          <li>Countries like Qatar, UAE, and Australia are among the hottest due to their geographical location and urbanization.</li>
+                          <li>Regions with high population densities and urban sprawl tend to have higher average temperatures.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+              <h2 class="resume-title">Urban Population Percentage vs Avg Temperature</h2>
+              <div class="resume-item">
+                <div id="imp3" class="tableauPlaceholder">
+                  <tableau-viz id="urb3" src="https://public.tableau.com/views/UrbanPopulationvsTemperatureScatterPlot/Dashboard2?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
+                </div>
+              </div>
+            </div>
+            <!-- Insights Section -->
+            <div class="contact section" id="insights3" style="padding-left:10px; padding-right:10px;">
+              <h3 style="text-align: center; font-size:large; padding-bottom:30px;">Insights</h3>
+              <div class="row">
+                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+                  <div class="info-wrap">
+                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                      <i class="bi bi-info-circle flex-shrink-0"></i>
+                      <div>
+                        <h3>Urban Population & Temperature Correlation</h3>
+                        <ul>
+                          <li>Urban population density has a positive correlation with rising average temperatures.</li>
+                          <li>As more people move to urban areas, local temperatures tend to increase due to reduced green spaces and increased concrete surfaces.</li>
+                          <li>The relationship between urban growth and temperature is particularly noticeable in megacities like Tokyo, New York, and Beijing.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-          <h3 class="resume-title">UHI Regional Impacts</h3>
-          <div class="resume-item">
-            <div id="imp4" class="tableauPlaceholder">
-              <tableau-viz id="urb4" src="https://public.tableau.com/shared/HMK8BZ9F7?:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
+      </div>
+  
+      <div id="uhiTrends" class="tab-content">
+        <p>Short text here about UHI trends...</p>
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="resume-title">UHI Intensity Trends</h3>
+            <div class="resume-item">
+              <div id="imp4" class="tableauPlaceholder">
+                <tableau-viz id="urb4" src="https://public.tableau.com/views/GlobalTempMap/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="resume-title">UHI Regional Impacts</h3>
+            <div class="resume-item">
+              <div id="imp5" class="tableauPlaceholder">
+                <tableau-viz id="urb5" src="https://public.tableau.com/shared/HMK8BZ9F7?:display_count=n&:origin=viz_share_link" hide-tabs style="width: 100%; height: 100%;"></tableau-viz>
+              </div>
             </div>
           </div>
         </div>
       </div>
+  
     </div>
-
-  </div>
-
-  <script>
-    function openTab(tabName) {
-      // Hide all tab contents
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-
-      // Remove active class from all buttons
-      document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
-
-      // Show the selected tab content
-      document.getElementById(tabName).classList.add('active');
-
-      // Add active class to the clicked button
-      event.currentTarget.classList.add('active');
-    }
-  </script>
-</body>
-
-</html>
+    
+    <script>
+      function openTab(tabName) {
+        // Hide all tab contents
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+  
+        // Remove active class from all buttons
+        document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+  
+        // Show the selected tab content
+        document.getElementById(tabName).classList.add('active');
+  
+        // Add active class to the clicked button
+        event.currentTarget.classList.add('active');
+      }
+    </script>
+  </body>
+  
