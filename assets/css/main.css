@@ -1342,7 +1342,7 @@ section,
   border-radius: 5px;
 }
 
-.mini-tab-button, .GGmini-tab-button, .AQmini-tab-buttons {
+.mini-tab-button, .GGmini-tab-button, .AQmini-tab-button {
   background: none;
   border: none;
   padding: 10px 20px;
@@ -1350,7 +1350,7 @@ section,
   font-size: 16px;
 }
 
-.mini-tab-button.active, .GGmini-tab-button.active, .AQmini-tab-buttons.active {
+.mini-tab-button.active, .GGmini-tab-button.active, .AQmini-tab-button.active {
   font-weight: bold;
   color: white;
   background-color: #091628;
