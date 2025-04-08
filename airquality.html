@@ -12,18 +12,8 @@
 </head>
 
 <body>
-    
-    
     <!-- Air Quality Section -->
     <div class="container" id="airqualitysection">
-
-        <div class="tab-container">
-            <div class="tab-buttons">
-              <button class="tab-button active" onclick="openTab('AQPopulation')">Temperature Trends</button>
-              <button class="tab-button" onclick="openTab('AQTrends')">UHI Trends</button>
-            </div>
-        </div>
-        
         <div class="container section-title" data-aos="fade-up">
             <h2>Air Quality</h2>
             <p>Why is air quality important?</p>
@@ -38,64 +28,42 @@
             </ul>
         </div>
 
-        <!-- Air Quality Tab Buttons -->
-    <div class="tab-buttons">
-        <button class="tab-button active" onclick="openTab('AQPopulation', event)">Air Quality and Population Impact</button>
-        <button class="tab-button" onclick="openTab('AQTrends', event)">Pollution Trends Across Regions</button>
-      </div>
-  
-      <!-- Tab Content 1 -->
-      <div id="AQPopulation" class="tab-content active">
-        <div class="row">
-          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
-            <h3 class="resume-title">Air Quality and Population Impact</h3>
-            <div class="resume-item">
-              <div class="tableauPlaceholder">
-                <tableau-viz id="aq1"
-                  src="https://public.tableau.com/views/First_17438272241860/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
-                  style="width: 100%; height: 100%;"></tableau-viz>
-              </div>
+        <div class="container">
+            <!-- 1st row -->
+            <div class="row">
+                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="resume-title">Air Quality and Population Impact</h3>
+                    <div class="resume-item">
+                        <!-- Insert chart or content here -->
+                        <div id='aq1' class='tableauPlaceholder'>
+                            <tableau-viz id="aq1"
+                                src='https://public.tableau.com/views/First_17438272241860/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link'
+                                style="width: 100%; height: 100%;">
+                            </tableau-viz>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Tab Content 2 -->
-      <div id="AQTrends" class="tab-content">
-        <div class="row">
-          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
-            <h3 class="resume-title">Pollution Trends Across Regions</h3>
-            <div class="resume-item">
-              <div class="tableauPlaceholder">
-                <tableau-viz id="aq2"
-                  src="https://public.tableau.com/shared/4TRS6NWMD?:display_count=n&:origin=viz_share_link"
-                  style="width: 100%; height: 100%;"></tableau-viz>
-              </div>
+
+            <!-- 2nd row -->
+            <div class="row">
+                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="resume-title">Pollution Trends Across Regions</h3>
+                    <div class="resume-item">
+                        <!-- Insert chart or content here -->
+                        <div id='aq2' class='tableauPlaceholder'>
+                            <tableau-viz id="aq2"
+                                src='https://public.tableau.com/shared/4TRS6NWMD?:display_count=n&:origin=viz_share_link'
+                                style="width: 100%; height: 100%;">
+                            </tableau-viz>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
     <!-- /Air Section -->
-    <script>
-        function openTab(tabName, event) {
-        // Fallback if event is undefined
-        const button = event?.currentTarget || document.querySelector(`[onclick*="${tabName}"]`);
-        
-        // Hide all tabs
-        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
 
-        // Remove all active button classes
-        document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
-
-        // Show the new tab
-        document.getElementById(tabName).classList.add('active');
-
-        // Activate the correct button
-        if (button) button.classList.add('active');
-        }
-
-      </script>
 </body>
 
 </html>
