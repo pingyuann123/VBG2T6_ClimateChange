@@ -1294,12 +1294,12 @@ section,
   /* Add your styles here */
 }
 
-.tab-container, .GGtab-container {
+.tab-container, .GGtab-container, .AQtab-container {
   width: 100%;
   margin: auto;
 }
 
-.tab-buttons, .GGtab-buttons {
+.tab-buttons, .GGtab-buttons, .AQtab-buttons {
   display: flex;
   justify-content: space-around;
   background-color: #f1f1f1;
@@ -1307,7 +1307,7 @@ section,
   border-radius: 5px;
 }
 
-.tab-button, .GGtab-button {
+.tab-button, .GGtab-button, .AQtab-button {
   background: none;
   border: none;
   padding: 10px 20px;
@@ -1315,14 +1315,14 @@ section,
   font-size: 16px;
 }
 
-.tab-button.active, .GGtab-button.active {
+.tab-button.active, .GGtab-button.active, .AQtab-button.active {
   font-weight: bold;
   color: white;
   background-color: #091628;
   border-radius: 5px;
 }
 
-.tab-content, .GGtab-content  {
+.tab-content, .GGtab-content, .AQtab-content {
   display: none;
   padding: 20px;
   border: 1px solid #ddd;
@@ -1330,11 +1330,11 @@ section,
   margin-top: 10px;
 }
 
-.tab-content.active, .GGtab-content.active {
+.tab-content.active, .GGtab-content.active, .AQtab-content.active {
   display: block;
 }
 
-.mini-tab-buttons, .GGmini-tab-buttons {
+.mini-tab-buttons, .GGmini-tab-buttons, .AQmini-tab-buttons {
   display: flex;
   justify-content: space-around;
   background-color: #f1f1f1;
@@ -1342,7 +1342,7 @@ section,
   border-radius: 5px;
 }
 
-.mini-tab-button, .GGmini-tab-button {
+.mini-tab-button, .GGmini-tab-button, .AQmini-tab-buttons {
   background: none;
   border: none;
   padding: 10px 20px;
@@ -1350,14 +1350,14 @@ section,
   font-size: 16px;
 }
 
-.mini-tab-button.active, .GGmini-tab-button.active {
+.mini-tab-button.active, .GGmini-tab-button.active, .AQmini-tab-buttons.active {
   font-weight: bold;
   color: white;
   background-color: #091628;
   border-radius: 5px;
 }
 
-.mini-tab-content, .GGmini-tab-content {
+.mini-tab-content, .GGmini-tab-content, .AQmini-tab-content {
   display: none;
   padding: 20px;
   border: 1px solid #ddd;
@@ -1365,6 +1365,6 @@ section,
   margin-top: 10px;
 }
 
-.mini-tab-content.active, .GGmini-tab-content.active {
+.mini-tab-content.active, .GGmini-tab-content.active, .AQmini-tab-content.active {
   display: block;
 }

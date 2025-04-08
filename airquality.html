@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+
 </head>
 
 <body>
@@ -28,41 +29,67 @@
             </ul>
         </div>
 
-        <div class="container">
-            <!-- 1st row -->
+        <div class="AQtab-container">
+            <div class="AQtab-buttons">
+                <button class="AQtab-button" onclick="AQopenTab('AQPopulation')">Air Quality and Population Impact</button>
+                <button class="AQtab-button" onclick="AQopenTab('AQTrends')">Pollution Trends Across Regions</button>
+            </div>
+        </div>
+
+        <!-- Tab Content 1 -->
+        <div id="AQPopulation" class="AQtab-content">
             <div class="row">
                 <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="resume-title">Air Quality and Population Impact</h3>
+                    <!-- <h3 class="resume-title">Air Quality and Population Impact</h3> -->
                     <div class="resume-item">
-                        <!-- Insert chart or content here -->
-                        <div id='aq1' class='tableauPlaceholder'>
-                            <tableau-viz id="aq1"
-                                src='https://public.tableau.com/views/First_17438272241860/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link'
-                                style="width: 100%; height: 100%;">
-                            </tableau-viz>
+                        <div class="AQmini-tab-container">
+                            <!-- Mini Tab Buttons -->
+                            <div class="AQmini-tab-buttons">
+                                <button class="AQmini-tab-button" onclick="AQopenMiniTab('MiniTab1')">No2 vs PM2.5</button>
+                                <button class="AQmini-tab-button" onclick="AQopenMiniTab('MiniTab2')">Temperature vs No2 & PM2.5</button>
+                            </div>
+
+                            <!-- Mini Tab Content -->
+                            <div id="MiniTab1" class="AQmini-tab-content" style="display:block;">
+                                <div class="tableauPlaceholder">
+                                    <tableau-viz id="aq1"
+                                        src="https://public.tableau.com/shared/X8NB633GW?:display_count=n&:origin=viz_share_link"
+                                        style="width: 100%; height: 100%;">
+                                    </tableau-viz>
+                                </div>
+                            </div>
+                            <div id="MiniTab2" class="AQmini-tab-content" style="display:none;">
+                                <!-- Add your second mini tab content here -->
+                                <div class="tableauPlaceholder">
+                                    <tableau-viz id="aq1"
+                                        src="https://public.tableau.com/views/TemperaturevsNo2Pm2_5/TemperaturevsNo2Pm2_5?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
+                                        style="width: 100%; height: 100%;">
+                                    </tableau-viz>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- 2nd row -->
+        </div>
+        <!-- Tab Content 2 -->
+        <div id="AQTrends" class="AQtab-content" style="display:none;">
             <div class="row">
                 <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="resume-title">Pollution Trends Across Regions</h3>
                     <div class="resume-item">
-                        <!-- Insert chart or content here -->
-                        <div id='aq2' class='tableauPlaceholder'>
+                        <div class="tableauPlaceholder">
                             <tableau-viz id="aq2"
-                                src='https://public.tableau.com/shared/4TRS6NWMD?:display_count=n&:origin=viz_share_link'
-                                style="width: 100%; height: 100%;">
+                                src="https://public.tableau.com/shared/4TRS6NWMD?:display_count=n&:origin=viz_share_link"
+                                style="width: 80%; height: 100%;">
                             </tableau-viz>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- /Air Section -->
+
+    </div> <!-- /Air Quality Section -->
 
 </body>
 

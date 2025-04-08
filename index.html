@@ -607,6 +607,62 @@
       // Add active class to the clicked button
       event.currentTarget.classList.add('active');
     }
+
+    function AQopenTab(tabName) {
+            var i, tabContent, tabButtons;
+
+            // Get all elements with class="AQtab-content" and hide them
+            tabContent = document.getElementsByClassName("AQtab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+
+            // Get all elements with class="AQtab-button" and remove the "active" class
+            tabButtons = document.getElementsByClassName("AQtab-button");
+            for (i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+
+            // Show the specific tab content and add "active" class to the clicked button
+            document.getElementById(tabName).style.display = "block";
+            event.currentTarget.classList.add("active");
+            // Trigger resize for the tableau viz
+            var tableauViz = document.getElementById(miniTabName).getElementsByTagName('tableau-viz');
+            if (tableauViz.length > 0) {
+                tableauViz[0].contentWindow.postMessage('resize', '*');}
+        }
+
+        function AQopenMiniTab(tabName) {
+            var i, tabContent, tabButtons;
+
+            // Get all elements with class="AQtab-content" and hide them
+            tabContent = document.getElementsByClassName("AQmini-tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+
+            // Get all elements with class="AQtab-button" and remove the "active" class
+            tabButtons = document.getElementsByClassName("AQmini-tab-button");
+            for (i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+
+            // Show the specific tab content and add "active" class to the clicked button
+            document.getElementById(tabName).style.display = "block";
+            event.currentTarget.classList.add("active");
+
+            // Trigger resize for the tableau viz
+            var tableauViz = document.getElementById(miniTabName).getElementsByTagName('tableau-viz');
+            if (tableauViz.length > 0) {
+                tableauViz[0].contentWindow.postMessage('resize', '*');
+        }
+
+        // Set the default tab to be open on page load
+        window.onload = function() {
+            document.getElementById("AQPopulation").style.display = "block";
+            document.getElementsByClassName("AQtab-button")[0].classList.add("active");}
+        };
+
   </script>
 
 
